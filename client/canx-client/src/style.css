@@ -1,3 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #26292E;
+  font-family: 'Titillium Web', sans-serif;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@font-face {
+	font-family: 'Icons';
+	src: url('../public/fonts/Icons.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .title {
 	display: inline;
 }

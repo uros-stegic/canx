@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import './style.css';
+import Nav from './Nav.js';
 
 class App extends Component {
   render() {
@@ -12,14 +13,7 @@ class App extends Component {
 
 		<div className="login-btn"> LOGIN </div>
 		<div className="login-btn"> SIGN UP </div>
-		<div className="control-nav container-fluid">
-			<div className="row">
-				<div className="col-xs-2 col-sm-2 "> </div>
-				<div className="col-xs-2 col-sm-2 "> </div>
-				<div className=" col-xs-2 col-sm-2 col-xs-offset-6 col-sm-offset-6 "> </div>
-
-	 		</div>
-	 	</div>
+		<Nav />
 	  </div>
     );
   }
