@@ -1,0 +1,4 @@
+database:
+  database: canx-server_test
+
+auth-dummy-login: true
