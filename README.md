@@ -30,8 +30,8 @@ npm install
 
 ## Usage
 
-Since Haskell development is in early stage, only front-end is being developed ATM. Untill back-end gets more serious,
-	  app is served via nodejs from `canx/client/canx-client/` folder with command:
+Since development is still in early stage, only front-end is being developed ATM. Untill back-end gets more serious,
+	  app should be served via nodejs from `canx/client/canx-client/` folder with command:
 ```
 npm start
 ```
