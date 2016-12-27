@@ -1,14 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  background: #26292E;
-  font-family: 'Titillium Web', sans-serif;
-  color: white;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
 @font-face {
 	font-family: 'Icons';
 	src: url('../public/fonts/Icons.ttf');
@@ -16,8 +5,42 @@ body {
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Titillium';
+	src: url('../public/fonts/TitilliumWeb-Regular.ttf');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #2f3238;
+  font-family: 'Titillium', sans-serif;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+
+figure {
+	margin-top: 50px;
+}
+
 .title {
-	display: inline;
+	letter-spacing: 30px;
+	font-size: 45px;
+	text-align: center;
+	width: 100%;
+	text-indent: 30px;
+	margin-bottom: 40px;
 }
 
 .app {
@@ -50,6 +73,7 @@ body {
 	
 .login-btn {
 	background-color: #36393E;
+	color: white;
 }
 
 @media screen and (min-width: 768px) {
@@ -66,6 +90,8 @@ body {
 	}
 }
 
+/*---------- NAV ----------*/
+
 .control-nav {
   position: absolute;
   bottom: 0px;
@@ -73,7 +99,6 @@ body {
   height: 40px;
   line-height: 40px;
   font-size: 25px;	
-  display: none;
 }
 
 .control-nav .row { 
@@ -82,18 +107,18 @@ body {
 
 @media screen and (max-width: 768px) {
 	.control-nav .row div:active { 
-		background-color: #DE5E60;
+		background-color: #575A5F;
 	}
 }
 
 @media screen and (min-width: 768px) {
 	.control-nav .row div:hover { 
-		background-color: #DE5E60;
+		background-color: #575A5F;
 		cursor: pointer;
 	}
 }
 .control-nav .row div { 
-	background-color: #272A2F;
+	background-color: #26292a;
 	padding: 0px;	
 }
 
@@ -108,5 +133,303 @@ body {
 .control-nav .row  div:nth-child(3):before{
 	font-family: 'Icons';
 	content: "\e0d3";	
+}
+.colapse{
+    overflow: hidden;
+	-webkit-transition: height 0.3s ease-in;
+    transition: height 0.3s ease-in;
+    height: 0;
+}
+
+.colapse *{
+    overflow: hidden;
+	-webkit-transition: height 0.3s ease-in;
+    transition: height 0.3s ease-in;
+    height: 0;
+}
+
+.uncolapse {
+	display: block;
+	-webkit-transition: height  0.3s ease-in;
+    transition: height 0.3s ease-in;
+	height: 100vh;
+}
+.uncolapse * {
+	-webkit-transition: height  0.3s ease-in;
+    transition: height  0.3s ease-in;
+}
+
+.collapsable {
+	z-index: 1;	
+	position: fixed;
+	left: 0;
+	right: 0;
+}
+
+.clear-dropdown {
+	height: 100%;
+}
+
+.nav-bar{
+	width: 100%;
+	background-color:  #373a3f;
+	box-sizing: border-box;
+	border-bottom: 1px solid gray;
+	color: white;
+}
+/*---------- HEADER ----------*/
+
+.header {
+  width: 100%;  
+  height: 40px;
+  line-height: 40px;
+  font-size: 25px;	
+  background-color: #26292a;
+}
+
+.header-right {
+	height: 16px;
+	width: 16px;
+    margin-top: 12px;
+	background:url(../public/img/hamburger.png) 0 0 no-repeat;
+}
+
+.header-right-closed {	
+	-webkit-transform: rotate(0deg);
+	   -moz-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		 -o-transform: rotate(0deg);
+			transform: rotate(0deg);
+	
+	-webkit-transition: -webkit-transform 250ms ease-out 0s;	
+	   -moz-transition: -moz-transform 250ms ease-out 0s;
+		 -o-transition: -o-transform 250ms ease-out 0s;
+		    transition: transform 250ms ease-out 0s;
+}
+
+.header-right-open {
+	background-position: 0px -16px;
+		  
+	-webkit-transform: rotate(-180deg);
+	   -moz-transform: rotate(-180deg);
+		-ms-transform: rotate(-180deg);
+		 -o-transform: rotate(-180deg);
+			transform: rotate(-180deg);
+	
+	-webkit-transition: -webkit-transform 250ms ease-out 0s;	
+	   -moz-transition: -moz-transform 250ms ease-out 0s;
+		 -o-transition: -o-transform 250ms ease-out 0s;
+		    transition: transform 250ms ease-out 0s;	
+}
+
+.col-xs-2 {
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
+.col-xs-3 {
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
+.header-left {
+/*	text-align: left;
+	background-image: url("../public/img/logo.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 20% 0%;
+*/}
+/*---------- LETTERS ----------*/
+
+.letters {
+	margin: 3%;
+}
+
+.letter-container {
+	width: 35%;
+	padding: 35%;
+	margin-left: 15%;
+	margin-top: 11%;
+	position: relative;
+	background-color:  #575A5F;
+}
+
+@media screen and (min-width: 768px) {
+	.letter-container:hover {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.letter-container:active {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+}
+
+
+.letter {
+	color: #cccccc;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	font-weight: bold;
+}
+
+
+@media screen and (max-width: 480px){
+	.letter{
+		font-size: 3em;
+	} 
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 768px){
+	.letter{
+		font-size: 4em;
+	} 
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+	.letter{
+		font-size: 5em;
+	} 
+}
+
+@media screen and (min-width: 1024px){
+	.letter{
+		font-size: 6em;
+	} 
+}
+.letters-title{
+	font-size: 30px;
+}
+
+/*---------- REGISTER ----------*/
+
+.reg-group {
+	margin: auto;
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px){
+	.reg-group {
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 768px){
+	.reg-group {
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.reg-group {
+		width: 90%;
+	}
+}
+/*---------- SIGN ----------*/
+
+
+.sign-group {
+	margin: auto;
+	margin-top: 15px;
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px){
+	.sign-group {
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 768px){
+	.sign-group {
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.sign-group {
+		width: 70%;
+	}
+}
+
+.sign-group input {
+	background-color:  #36393E;
+	color: white;
+}
+
+/*---------- HOME ----------*/
+
+.home-container {
+	width: 90vw;
+	padding-bottom: 90vw;
+	margin: 10px auto;
+}
+
+.home-container figure {
+	margin: 0;
+}
+
+.home-btn-container {
+	margin-left: 6.6vw;
+	margin-top: 6.6vw;
+	width: 35vw;
+	padding-bottom: 35vw;
+	background-color:  #575A5F;
+	float: left;
+	position: relative;
+}
+
+
+@media screen and (min-width: 768px) {
+	.home-btn-container:hover {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.home-btn-container:active {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+}
+
+.home-btn {
+	color: #cccccc;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	font-weight: bold;
+}
+
+
+@media screen and (max-width: 480px){
+	.home-btn {
+		font-size: 1em;
+	} 
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 768px){
+	.home-btn {
+		font-size: 2em;
+	} 
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+	.home-btn{
+		font-size: 3em;
+	} 
+}
+
+@media screen and (min-width: 1024px){
+	.home-btn{
+		font-size: 4em;
+	} 
 }
 

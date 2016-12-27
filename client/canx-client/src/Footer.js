@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './style.css';
   
-class Nav extends Component {
-  render() {        
+function Footer(props) {
     return (
 	 <div className="control-nav container-fluid">
         <div className="row">
@@ -11,7 +10,7 @@ class Nav extends Component {
             <div className=" col-xs-2 col-sm-2 col-xs-offset-6 col-sm-offset-6 "> </div>
         </div>
     </div>
-);}
+);
 }
 
-export default Nav;
+export default Footer;
