@@ -1,0 +1,10 @@
+------- Header.js ------------
+
+- animacija navigacije kad se klikne na burger
+- podizanje navigacije - borderi se sazmu
+
+------ Main.js --------------
+
+- scroll ne radi
+
+

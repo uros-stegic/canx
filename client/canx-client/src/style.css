@@ -10,6 +10,11 @@
 	src: url('../public/fonts/TitilliumWeb-Regular.ttf');
 }
 
+@font-face {
+	font-family: 'Ionicons';
+	src: url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/fonts/ionicons.ttf');
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -95,7 +100,7 @@ figure {
 .control-nav {
   position: absolute;
   bottom: 0px;
-  width: 100%;  
+  width: 100%; 
   height: 40px;
   line-height: 40px;
   font-size: 25px;	
@@ -124,13 +129,9 @@ figure {
 
 .control-nav .row div:nth-child(1):before {
 	font-family: 'Icons';
-	content: "\e0d7";	
-}
-.control-nav .row div:nth-child(2):before{
-	font-family: 'Icons';
 	content: "\e0d5";	
 }
-.control-nav .row  div:nth-child(3):before{
+.control-nav .row div:nth-child(2):before{
 	font-family: 'Icons';
 	content: "\e0d3";	
 }
@@ -173,9 +174,18 @@ figure {
 .nav-bar{
 	width: 100%;
 	background-color:  #373a3f;
+	font-size: 16px;
 	box-sizing: border-box;
 	border-bottom: 1px solid gray;
 	color: white;
+  text-align: left; 
+}
+
+.nav-icon {
+	display: inline-block;
+	margin-right: 10%;
+	font-size: 16px;
+	margin-left: 10%;
 }
 /*---------- HEADER ----------*/
 
@@ -188,12 +198,19 @@ figure {
 }
 
 .header-right {
+	height: 40px;
+}
+
+.header-right-into {
 	height: 16px;
 	width: 16px;
-    margin-top: 12px;
+    margin: 12px auto;
 	background:url(../public/img/hamburger.png) 0 0 no-repeat;
 }
 
+.header-left {
+	color: white;
+}
 .header-right-closed {	
 	-webkit-transform: rotate(0deg);
 	   -moz-transform: rotate(0deg);
@@ -232,13 +249,6 @@ figure {
 	padding-left: 0px !important;
 }
 
-.header-left {
-/*	text-align: left;
-	background-image: url("../public/img/logo.jpg");
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: 20% 0%;
-*/}
 /*---------- LETTERS ----------*/
 
 .letters {
@@ -433,3 +443,59 @@ figure {
 	} 
 }
 
+.home-btn {
+	font-size: 48px;
+}
+
+.help-icon:before {
+	font-family: 'Ionicons';
+	content: "\f142";	
+}
+
+.categories-icon:before {
+	font-family: 'Ionicons';
+	content: "\f2bf";	
+}
+
+.profile-icon:before {
+	font-family: 'Ionicons';
+	content: "\f3a0";	
+}
+
+.logout-icon:before {
+	font-family: 'Ionicons';
+	content: "\f29f";
+		
+}
+
+/*---------- CATEGORIES ----------*/
+
+.category-container a:first-child div{
+	margin-top: 10vh;
+	color: white;
+	border-top: 1px solid gray;
+}
+
+.category-row {
+	font-size: 18px;
+	color: white;
+	width: 90%;
+	height: 40px;
+	border-bottom: 1px solid gray;
+	background-color: #373A3F;
+	margin: auto;
+	line-height: 40px;
+}
+
+@media screen and (max-width: 768px) {
+	.category-row:active { 
+		background-color: #575A5F;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.category-row:hover { 
+		background-color: #575A5F;
+		cursor: pointer;
+	}
+}

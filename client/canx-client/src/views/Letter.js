@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.css';
 
 function Letter(props) {
    const letter = props.letter; 

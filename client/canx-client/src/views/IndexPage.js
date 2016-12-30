@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import './style.css';
 import Logo from './Logo'
 
 function IndexPage(props) {

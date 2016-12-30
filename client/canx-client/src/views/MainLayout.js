@@ -1,9 +1,8 @@
 import React from 'react';
-import './style.css';
 import Footer from './Footer';
 import Header from './Header';
 
-class Main extends React.Component {
+class MainLayout extends React.Component {
    render(){
 		return (
     	  <div > 
@@ -14,4 +13,4 @@ class Main extends React.Component {
     );}
 }
 
-export default Main;
+export default MainLayout;

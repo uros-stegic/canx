@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import './style.css';
 import Logo from './Logo';
 
 class Home extends React.Component {
@@ -12,24 +11,25 @@ class Home extends React.Component {
 			<div>
 				<Link to='/categories'>
 					<div className='home-btn-container'>
-						<div className='home-btn'> CATEGORIES </div>
+						<div className='categories-icon home-btn'> </div>
+
 	   		 		</div>
 				</Link>
 				<Link to='/profile'>
 					<div className='home-btn-container'>
-						<div className='home-btn'> PROFILE </div>
+						<div className='profile-icon home-btn'> </div>
 	   		 		</div>
 				</Link>
 			</div>	
 			<div>
 				<Link to='/help'>
 					<div className='home-btn-container'>
-						<div className='home-btn'> HELP </div>
+						<div className='help-icon home-btn'> </div>
 	   		 		</div>
 				 </Link>
 				<Link to='/logout'>
 					<div className='home-btn-container'>
-						<div className='home-btn'> LOGOUT </div>
+						<div className='logout-icon home-btn'> </div>
 	   			 	</div>
 				</Link>
 			</div>	

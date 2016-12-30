@@ -1,10 +1,9 @@
 import React from 'react';
-import './style.css';
 import Letter from "./Letter"
 
 function Letters(props) {
-   const letters = props.route.letters.split(""); 
-   const title = props.route.title;
+   const letters = props.letters.split(""); 
+   const title = props.title;
  
    	return (
       <div className="letters row">
