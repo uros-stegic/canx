@@ -1,3 +1,4 @@
+# haskell
 dist
 dist-*
 cabal-dev
@@ -17,5 +18,15 @@ cabal.sandbox.config
 *.eventlog
 .stack-work/
 cabal.project.local
+
+# npm, react, js
+npm-debug.log
+
+# vim  files
 **/.*.swp
+**/.*.un~
+
+# tex junk
+docs/*
+!docs/*.tex
 
