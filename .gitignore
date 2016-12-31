@@ -30,4 +30,5 @@ npm-debug.log
 docs/*
 !docs/*.tex
 !docs/*.png
+!docs/*.pdf
 
