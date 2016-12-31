@@ -29,4 +29,5 @@ npm-debug.log
 # tex junk
 docs/*
 !docs/*.tex
+!docs/*.png
 
