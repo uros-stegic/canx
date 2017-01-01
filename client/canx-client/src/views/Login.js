@@ -13,7 +13,7 @@ function Login(props) {
 					<label> Password: </label>
 					<input type='password' name='password' className='form-control'/>
 				</div>
-				<div className='form-group login-btn sign-group'> LOGIN </div>
+				<input type='submit' className='btn form-group login-btn sign-group' value='LOGIN' />
 			</form>
 		</div>
     );

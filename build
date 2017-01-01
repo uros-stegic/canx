@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+cd client/canx-client
+npm run build
+cat build/index.html > ../../server/canx-server/templates/default-layout-wrapper.hamlet
+echo "-- Index.html copied. --"
+cp -R build/static/* ../../server/canx-server/static/
+echo "-- Static folders copied. --"
+cp -R build/fonts ../../server/canx-server/static/
+echo "-- Fonts copied. --"
+cp -R build/img ../../server/canx-server/static/
+echo "-- Images copied. --"
+if [[ $1 == 'run' ]]; then
+	cd ../../server/canx-server
+	stack exec -- yesod devel
+fi
+

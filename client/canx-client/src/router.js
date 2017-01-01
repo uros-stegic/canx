@@ -23,8 +23,8 @@ export default (
 		<Route path='/'>
 			<IndexRoute component={IndexPage}/>
 			<Route component={MainLayout}>
-				<Route path='home' component={Home}/>
-				<Route path='categories'>
+				<Route path='/home' component={Home}/>
+				<Route path='/categories'>
 					<IndexRoute component={Categories}/>
 					<Route path='/categories/:category' component={CategoryContainer} />
 				</Route>

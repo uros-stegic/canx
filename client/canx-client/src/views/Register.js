@@ -21,7 +21,7 @@ function Register(props) {
 						<label> Confirm password: </label>
 						<input type='password' name='confitmPassword' className='form-control'/>
 				</div>
-				<div className='form-group login-btn sign-group'> REGISTER </div>
+				<input type='submit' className='btn form-group login-btn sign-group' value='REGISTER' />
 			</form>
 		</div>
     );

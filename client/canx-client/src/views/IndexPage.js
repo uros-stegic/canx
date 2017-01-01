@@ -8,8 +8,8 @@ function IndexPage(props) {
 		<Logo/> 
 		<h1 className="title"> CANX</h1>
 
-		<Link to='/login'> <div className="login-btn"> LOGIN </div> </Link> 
-		<Link to='/register'><div className="login-btn">  REGISTER </div></Link> 
+		<Link to='/login'> <div className="indeks-btn"> LOGIN </div> </Link> 
+		<Link to='/register'><div className="indeks-btn">  REGISTER </div></Link> 
 	  </div>
     );
 }
