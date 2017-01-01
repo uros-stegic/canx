@@ -22,7 +22,6 @@ From folder `canx/server/canx-server/` run:
 ```
 stack build yesod-bin cabal-install --install-ghc
 stack build
-stack exec -- yesod devel
 ```
 After that, go to folder `canx/client/canx-client/` and run:
 ```
@@ -31,10 +30,8 @@ npm install
 
 ## Usage
 
-Since development is still in early stage, only front-end is being developed ATM. Untill back-end gets more serious,
-	  app should be served via nodejs from `canx/client/canx-client/` folder with command:
 ```
-npm start
+./build run
 ```
 After that, visit `http://localhost:3000`
 
