@@ -22,6 +22,7 @@ From folder `canx/server/canx-server/` run:
 ```
 stack build yesod-bin cabal-install --install-ghc
 stack build
+stack exec -- yesod devel
 ```
 After that, go to folder `canx/client/canx-client/` and run:
 ```
