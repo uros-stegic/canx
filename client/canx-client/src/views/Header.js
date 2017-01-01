@@ -10,7 +10,7 @@ class Header extends Component {
 	};
 
 	toggleState(){
-		this.setState({open: !this.state.open});
+		return () => this.setState({open: !this.state.open});
 	}
 	render() {
 		return (
@@ -24,10 +24,10 @@ class Header extends Component {
 	
 		<div className={"collapsable " + (this.state.open ? 'uncolapse' : 'colapse')}>
 
-			<Link to='/categories' onClick={()=> this.setState({open: !this.state.open})}> <div className='nav-bar'><span className='nav-icon categories-icon'></span> DRAW </div></Link>
-			<Link to='/profile' onClick={()=> this.setState({open: !this.state.open})}> <div className='nav-bar'><span className='nav-icon profile-icon'></span>  PROFILE </div></Link>
-			<Link to='/help' onClick={()=> this.setState({open: !this.state.open})}> <div className='nav-bar'><span className='nav-icon help-icon'></span>  HELP </div></Link>
-			<Link to='/logout' onClick={()=> this.setState({open: !this.state.open})}> <div className='nav-bar'><span className='nav-icon logout-icon'></span>  LOGOUT </div></Link>
+			<Link to='/categories' onClick={this.toggleState()}> <div className='nav-bar'><span className='nav-icon categories-icon'></span> DRAW </div></Link>
+			<Link to='/profile' onClick={this.toggleState()}> <div className='nav-bar'><span className='nav-icon profile-icon'></span>  PROFILE </div></Link>
+			<Link to='/help' onClick={this.toggleState()}> <div className='nav-bar'><span className='nav-icon help-icon'></span>  HELP </div></Link>
+			<Link to='/logout' onClick={this.toggleState()}> <div className='nav-bar'><span className='nav-icon logout-icon'></span>  LOGOUT </div></Link>
 		
 			<div className={this.state.open ? 'clear-dropdown' : ''}> </div>
 		</div> 

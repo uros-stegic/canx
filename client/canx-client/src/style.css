@@ -34,6 +34,27 @@ body {
                                   not supported by any browser */
 }
 
+input {
+	border: 1px solid #666666 !important;
+}
+
+.btn:focus, .btn:active, .btn:hover {
+	outline: none !important;
+	color: #cccccc;
+}
+
+.btn:active {
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);	
+	color: white;
+}
+
+.clear-fix {
+	clear: both;
+}
+
+.display-none {
+	display: none !important;
+}
 
 figure {
 	margin-top: 50px;
@@ -499,3 +520,290 @@ figure {
 		cursor: pointer;
 	}
 }
+
+/*---------- PROFILE ----------*/
+
+.profile {
+	color: #cccccc;
+}
+
+.profile-title{
+	text-align: center;
+	margin-bottom: 5vh;
+	width: 100%;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.profile-pic-row {
+	width: 100%;
+	position: relative;
+}
+
+.profile-pic-container {
+	width: 15vw;
+	padding: 15vw;
+	height: 31vw;
+	background-color:  #575A5F;
+	border: 1px solid #666666;
+	position: absolute;
+	left: 5vw;
+}
+
+.profile-no-pic:before {
+	font-family: 'Ionicons';
+	content: "\f3a0";
+	font-size: 20vw;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;	
+}
+
+.profile-name-container {
+	position: absolute;
+	left: 40vw;	
+	width: 55vw;
+	height: 31vw;
+	text-align: left;
+	padding: 1vw;
+	border:1px solid #666666;
+		
+}
+
+.profile-name-container h4 {
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 4vw;
+	height: 4vw;
+	position: absolute;
+}
+
+.name-text {	
+	position: absolute;
+	font-size: 7vw;
+	top: 7vw;	
+	width: 53vw;
+	height: 22vw;
+}
+
+.profile-name-container .sup:before {
+	font-size: 4vw;
+	font-family: 'Ionicons';
+	content: "\f2bf";
+}
+
+
+.profile-name-container .sup {
+	position: absolute;
+	left: 46vw;	
+	padding: 0.5vw;
+	margin-top: -0.5vw;
+	width: 8vw;
+	height: 8vw;
+	text-align: right;
+
+}
+.name-input-container {
+	display: block;
+	position: absolute;
+	width: 53vw;
+	height: 20vw;
+	top: 8vw;
+}
+
+.name-input-container input[type='text']{
+	position: absolute;
+	width: 100%;
+	height:10.5vw;
+	color: #cccccc;	
+	background-color:  #575A5F;
+}
+
+.name-input-container input[type='submit']{
+	position: absolute;
+	width: 100%;
+	top: 56%;
+	height: 10.5vw;
+	background-color:  #575A5F;
+	font-size: 4.2vw;
+}
+
+
+
+.profile-email-container {
+	position: relative;
+	top: 35vw;
+	left: 5vw;
+	border:1px solid #666666;
+	padding: 1vw;
+	width: 90vw;
+	height: 20vw;
+	text-align: left;	
+}
+
+
+.profile-email-container h4 {
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 4vw;
+	height: 4vw;
+	position: absolute;
+}
+
+.profile-email-container .sup:before {
+	font-size: 4vw;
+	font-family: 'Ionicons';
+	content: "\f2bf";
+}
+
+.profile-email-container .sup {
+	position: absolute;
+	left: 81vw;	
+	padding: 0.5vw;
+	margin-top: -0.5vw;
+	width: 8vw;
+	height: 8vw;
+	text-align: right;
+
+}
+
+.email-input-container {
+	position: absolute;
+	width: 88vw;
+	height: 12vw;
+	top: 7vw;
+}
+.email-input-container input[type='email']{
+	position: absolute;
+	width: 75%;
+	height:87%;
+	top: 10%;
+	color: #cccccc;	
+	background-color:  #575A5F;
+}
+
+.email-input-container input[type='submit']{
+	position: absolute;
+	width: 24%;
+	left: 76%;
+	height: 87%;
+	background-color:  #575A5F;
+	top: 10%;
+	font-size: 4.2vw;
+}
+
+.email-text {
+	position: absolute;
+	font-size: 7vw;
+	top: 7vw;	
+	width: 88vw;
+   	height: 12vw;
+}
+
+.profile-pass-container {
+	position: relative;
+	top: 40vw;
+	left: 5vw;
+	border:1px solid #666666;
+	padding: 1vw;
+	width: 90vw;
+	height: 20vw;
+	text-align: left;	
+}
+
+.profile-pass-container h4 {
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 4vw;
+	height: 4vw;
+	position: absolute;
+}
+
+.pass-text {	
+	position: absolute;
+	font-size: 7vw;
+	top: 7vw;	
+	width: 88vw;
+ 	-webkit-text-security: circle;
+   	height: 12vw;
+}
+
+.profile-pass-container .sup:before {
+	font-size: 4vw;
+	font-family: 'Ionicons';
+	content: "\f2bf";
+}
+
+.profile-pass-container .sup {
+	position: absolute;
+	left: 81vw;	
+	padding: 0.5vw;
+	margin-top: -0.5vw;
+	width: 8vw;
+	height: 8vw;
+	text-align: right;
+
+}
+
+.pass-input-container {
+	position: absolute;
+	width: 88vw;
+	height: 12vw;
+	top: 7vw;
+}
+
+.pass-input-container input[type='password']{
+	position: absolute;
+	width: 75%;
+	height:87%;
+	top: 10%;
+	color: #cccccc;	
+	background-color:  #575A5F;
+}
+
+.pass-input-container input[type='submit']{
+	position: absolute;
+	width: 24%;
+	left: 76%;
+	height: 87%;
+	background-color:  #575A5F;
+	top: 10%;
+	font-size: 4.2vw;
+}
+
+@media screen and (min-width: 768px) {
+	.profile-no-pic:hover {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+	
+	.profile-no-pic:hover:before {
+		content: '\f2c7';
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.profile-no-pic:active {
+		background-color: #888A8F;
+		cursor: pointer;
+	}
+	
+	.profile-no-pic:active:before {
+		content: '\f2c7';
+	}
+}
+
+.profile-pic-input {
+	opacity: 0.0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+
