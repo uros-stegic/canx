@@ -1,3 +1,6 @@
 /static StaticR Static appStatic
 
 / HomeR GET POST
+
+/api/unprotected/#Int UnprotectedR GET
+/api/protected ProtectedR GET
