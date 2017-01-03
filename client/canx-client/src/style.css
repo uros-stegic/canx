@@ -813,3 +813,23 @@ figure {
 
 
 
+/*---------- LOGOUT ----------*/
+
+
+.logout-modal-yes{ 
+	width: 40%;
+	top: 60%;
+	position: absolute;
+	left: 5%;
+	height: 30%;
+	background-color:  #575A5F;
+}
+.logout-modal-no{ 
+	width: 40%;
+	background-color:  #575A5F;
+	left: 55%;
+	top: 60%;
+	position: absolute;
+	height: 30%;
+}
+
