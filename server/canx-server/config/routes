@@ -2,5 +2,5 @@
 
 / HomeR GET POST
 
-/api/unprotected/#Int UnprotectedR GET
+/api/unprotected/#Text UnprotectedR GET
 /api/protected ProtectedR GET

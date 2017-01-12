@@ -1,6 +1,9 @@
 User
     ident Text
+	email Text Maybe
     password Text Maybe
+	name Text Maybe
+	avatar Text Maybe
     UniqueUser ident
     deriving Typeable
 --Email

@@ -83,7 +83,7 @@ instance Yesod App where
         master <- getYesod
         mmsg <- getMessage
 
-        muser <- maybeAuthPair
+--        muser <- maybeAuthPair
         mcurrentRoute <- getCurrentRoute
 
         -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
@@ -180,8 +180,11 @@ instance YesodAuth App where
         case x of
             Just (Entity uid _) -> return $ Authenticated uid
             Nothing -> Authenticated <$> insert User
-                { userIdent = credsIdent creds
+                { userIdent    = credsIdent creds
                 , userPassword = Nothing
+                , userEmail    = Nothing
+                , userName     = Nothing
+                , userAvatar   = Nothing
                 }
 
     -- You can add other plugins like Google Email, email or OAuth here
