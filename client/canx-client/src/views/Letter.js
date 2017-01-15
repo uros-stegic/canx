@@ -1,15 +1,10 @@
 import React from 'react';
 
 function Letter(props) {
-   const letter = props.letter; 
-   	return (
-      <div className="letter-col col-xs-3"> 
-		<div className="letter-container">
-		   <div className="letter">	
-			{letter}
-	       </div>
-	   </div>
-	  </div>
+	return (
+		<h1 className='letter-h1'>
+			 {props.letter}
+		</h1> 
     );
 }
 

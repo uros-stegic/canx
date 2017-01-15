@@ -832,4 +832,20 @@ figure {
 	position: absolute;
 	height: 30%;
 }
+/*---------- HELP ----------*/
+
+.help-paragraph {
+	text-align: justify;
+	padding: 5vw;
+}
+
+/*---------- LETTER ----------*/
+
+.letter-h1 {
+	font-size: 13vw;	
+	font-weight: bold;
+	text-align: center;
+	line-height: 15vw;	
+	height: 14vw;
+}
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 // Containers
+import LetterContainer from './containers/LetterContainer';
 import CategoryContainer from './containers/CategoryContainer';
 import Categories from './containers/Categories';
 
@@ -26,7 +27,8 @@ export default (
 				<Route path='/home' component={Home}/>
 				<Route path='/categories'>
 					<IndexRoute component={Categories}/>
-					<Route path='/categories/:category' component={CategoryContainer} />
+					<Route path='/categories/:category' component={CategoryContainer} />	
+				<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
 				</Route>
 				<Route path='/profile' component={Profile}/>
 				<Route path='/help' component={Help}/>
