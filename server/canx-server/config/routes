@@ -2,5 +2,6 @@
 
 / HomeR GET POST
 
-/api/unprotected/#Text UnprotectedR GET
-/api/protected ProtectedR GET
+/api/users/ UsersR GET POST
+/api/users/#UserId UserR GET PUT DELETE
+

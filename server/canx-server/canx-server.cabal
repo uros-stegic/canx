@@ -20,11 +20,8 @@ library
                      Model
                      Settings
                      Settings.StaticFiles
---                     Handler.Common
                      Handler.Home
-                     Handler.REST
---                     Handler.Comment
---                     Handler.Profile
+                     Handler.User
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

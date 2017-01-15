@@ -24,11 +24,11 @@ approot:        "_env:APPROOT:http://127.0.0.1:8000"
 # See https://github.com/yesodweb/yesod/wiki/Configuration#parsing-numeric-values-as-strings
 
 database:
-  user:        "canx-server"
-  password:    "canx-server"
+  user:        ""
+  password:    ""
   host:        "localhost"
   # See config/test-settings.yml for an override during tests
-  database:    "canx-server"
+  database:    "canx"
   connections: 10
 
 copyright: Insert copyright statement here
