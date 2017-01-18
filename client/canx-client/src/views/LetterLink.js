@@ -2,15 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 
 function LetterLink(props) {
-   const letter = props.letter; 
-   const category = props.category; 
    	return (
       <div className="letter-col col-xs-3"> 
-		<div className="letter-container">
-		   <div className="letter">	
-			<Link to={"/categories/"+category.toLowerCase()+"/letters/"+letter} >{letter} </Link>
-	       </div>
-	   </div>
+		<Link className='letter-link' to={"/categories/"+props.args.title.toLowerCase()+"/letters/"+props.args.letter} >
+			<div className="letter-container">
+			   	<div className="letter">	
+				{props.args.letter}	    
+		   		</div>
+	   		</div>
+		 </Link>
 	  </div>
     );
 }

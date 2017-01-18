@@ -21,9 +21,18 @@ class CategoryContainer extends React.Component {
 	};
  
 	render(){
-		const prop=this.state.categories.find((cat) => cat.name.toLowerCase() === this.props.params.category);
+		const catName = this.props.params.category;
+		const cats = this.state.categories;
+		const category = cats.find((cat) => cat.name.toLowerCase() === catName);
+		const ind = cats.map((c) => c.name).indexOf(category.name);
+		const beforeInd = (ind === 0) ? (cats.length-1) : ind-1;
+		const afterInd = (ind === cats.length-1) ? 0 : ind+1;
+		const args = {category: category,
+					  before: cats[beforeInd].name.toLowerCase(),
+					  after: cats[afterInd].name.toLowerCase()};		
+
 		return (
-    		<Category category={prop}/>
+    		<Category args={args}/>
 		);
 	};
 }

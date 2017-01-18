@@ -1,15 +1,15 @@
 import React from 'react';
-import Footer from './Footer';
 import Header from './Header';
 
 class MainLayout extends React.Component {
-   render(){
+   	
+	render(){
 		return (
     	  <div > 
 			<Header />
+			<div className='footer-back'></div>
 			{this.props.children}
-			<Footer />
-	  	</div>
+  	</div>
     );}
 }
 

@@ -23,7 +23,6 @@ body {
   color: white;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   text-align: center;
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -39,6 +38,21 @@ input {
 	border-radius: 0 !important;
 }
 
+.footer-back {
+	height: 40px;
+	width: 100%;
+}
+
+@media (orientation:landscape) and (min-width: 520px) {
+	#root {
+		display: none !important;
+	}
+	body:after {
+		font-size: 5vw;
+		line-height: 100vh;
+		content: "Landscape mode not suported.";
+	}
+}
 .btn:focus, .btn:active, .btn:hover {
 	outline: none !important;
 	color: #cccccc;
@@ -125,8 +139,8 @@ figure {
 /*---------- NAV ----------*/
 
 .control-nav {
-  position: absolute;
-  bottom: 0px;
+  position: fixed !important;
+  bottom: 0px !important;
   width: 100%; 
   height: 40px;
   line-height: 40px;
@@ -152,16 +166,19 @@ figure {
 .control-nav .row div { 
 	background-color: #26292a;
 	padding: 0px;	
+	color: #cccccc;
 }
 
-.control-nav .row div:nth-child(1):before {
+.control-nav .row a:nth-child(1) div:before {
 	font-family: 'Icons';
 	content: "\e0d5";	
 }
-.control-nav .row div:nth-child(2):before{
+
+.control-nav .row a:nth-child(2) div:before{
 	font-family: 'Icons';
 	content: "\e0d3";	
 }
+
 .colapse{
     overflow: hidden;
 	-webkit-transition: height 0.3s ease-in;
@@ -169,7 +186,7 @@ figure {
     height: 0;
 }
 
-.colapse *{
+.colapse * {
     overflow: hidden;
 	-webkit-transition: height 0.3s ease-in;
     transition: height 0.3s ease-in;
@@ -182,13 +199,14 @@ figure {
     transition: height 0.3s ease-in;
 	height: 100vh;
 }
+
 .uncolapse * {
 	-webkit-transition: height  0.3s ease-in;
     transition: height  0.3s ease-in;
 }
 
 .collapsable {
-	z-index: 1;	
+	z-index: 20;	
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -205,7 +223,7 @@ figure {
 	box-sizing: border-box;
 	border-bottom: 1px solid gray;
 	color: white;
-  text-align: left; 
+ 	text-align: left; 
 }
 
 .nav-icon {
@@ -222,6 +240,9 @@ figure {
   line-height: 40px;
   font-size: 25px;	
   background-color: #26292a;
+  position: fixed;
+  top: 0;
+  z-index: 20;
 }
 
 .header-right {
@@ -283,6 +304,7 @@ figure {
 }
 
 .letter-container {
+	color: white;
 	width: 35%;
 	padding: 35%;
 	margin-left: 15%;
@@ -315,6 +337,9 @@ figure {
 	font-weight: bold;
 }
 
+.letter-link{
+	color: #cccccc;
+}
 
 @media screen and (max-width: 480px){
 	.letter{
@@ -342,6 +367,7 @@ figure {
 }
 .letters-title{
 	font-size: 30px;
+	margin-bottom: 2vh !important;
 }
 
 /*---------- REGISTER ----------*/
@@ -481,7 +507,7 @@ figure {
 
 .categories-icon:before {
 	font-family: 'Ionicons';
-	content: "\f2bf";	
+	content: "\f4d5";	
 }
 
 .profile-icon:before {
@@ -502,6 +528,7 @@ figure {
 	color: white;
 	border-top: 1px solid gray;
 }
+
 
 .category-row {
 	font-size: 18px;
@@ -531,6 +558,8 @@ figure {
 
 .profile {
 	color: #cccccc;
+	width: 100vw;
+	height: calc(100vh + 40px);
 }
 
 .profile-title{
@@ -546,7 +575,7 @@ figure {
 	position: relative;
 }
 
-.profile-pic-container {
+.profile-pic-container { 
 	width: 15vw;
 	padding: 15vw;
 	height: 31vw;
@@ -834,18 +863,74 @@ figure {
 }
 /*---------- HELP ----------*/
 
+.help-paragraph:nth-child(2) {
+	adding: 0vw 5vw 2vw 5vw ;
+}
 .help-paragraph {
 	text-align: justify;
-	padding: 5vw;
+	padding: 2vw 5vw 2vw 5vw ;
 }
 
 /*---------- LETTER ----------*/
+
+.letter-page {
+	overflow: hidden;
+}
 
 .letter-h1 {
 	font-size: 13vw;	
 	font-weight: bold;
 	text-align: center;
-	line-height: 15vw;	
-	height: 14vw;
+	line-height: 10vh;	
+	height: 10vh;
+	margin: 1vh auto;
 }
+
+.letter-canvas {
+	width: 90vw;
+	height: calc(85vh - 80px);
+	background-color:   #575a5f;
+	border: 1px solid #575a5f;
+	border-radius: 3vw;
+	-webkit-box-shadow: inset 0px 0px 10px 7px rgba(50, 50, 50, 1);
+	-moz-box-shadow:    inset 0px 0px 10px 7px rgba(50, 50, 50, 1);
+	box-shadow:         inset 0px 0px 10px 7px rgba(50, 50, 50, 1);
+
+}
+
+.letter-btn-left, .letter-btn-right {
+	width: 33.9%;
+	position: absolute;
+	line-height: 40px;
+	text-align: center;
+	bottom: 0px;
+	height: 40px;
+	z-index: 10;
+	box-sizing: border-box;
+}
+
+.letter-btn-left{
+	left: 16.4%;
+}
+
+.letter-btn-right{
+	right: 16.4%;
+	border-left: 2px solid  #575a5f;
+}
+.letter-btn-right:active, .letter-btn-left:active { 
+		background-color: #575A5F;
+	}
+
+.letter-btn-right:before {
+	font-family: 'Ionicons';
+	content: "\f122";
+	font-size: 6vw;	
+}
+
+.letter-btn-left:before {
+	font-family: 'Ionicons';
+	content: "\f253";	
+	font-size: 6vw;
+}
+
 

@@ -3,8 +3,10 @@ import Letter from '../views/Letter';
 
 class LetterContainer extends React.Component {
 	render(){
+		const args = {letter: this.props.params.letter,
+					  title: this.props.params.category};
 		return (
-    		<Letter letter={this.props.params.letter} category={this.props.params.category}/>
+    		<Letter args={args} />
 		);
 	};
 }
