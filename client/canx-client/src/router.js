@@ -27,14 +27,14 @@ export default (
 				<Route path='/home' component={Home}/>
 				<Route path='/categories'>
 					<IndexRoute component={Categories}/>
-					<Route path='/categories/:category' component={CategoryContainer} />	
-				<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
+					<Route path='/categories/:category' component={CategoryContainer} />
+					<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
 				</Route>
 				<Route path='/profile' component={Profile}/>
 				<Route path='/help' component={Help}/>
 			</Route>
 			<Route path='/login' component={Login} />
-			<Route path='/register' component={Register} />	
+			<Route path='/register' component={Register} />
 		</Route>
 		<Route path='*' component={NotFound} />
 	</Router>

@@ -59,7 +59,7 @@ input {
 }
 
 .btn:active {
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);	
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 	color: white;
 }
 
@@ -109,14 +109,14 @@ figure {
 		margin: auto;
 	}
 }
-	
+
 .login-btn, .indeks-btn {
 	background-color: #36393E;
 	color: #cccccc;
 }
 
 .indeks-btn {
-	margin: 10px auto;	
+	margin: 10px auto;
 	line-height: 40px;
 	font-size: 1em;
 	border: 1px solid #666666;
@@ -141,42 +141,42 @@ figure {
 .control-nav {
   position: fixed !important;
   bottom: 0px !important;
-  width: 100%; 
+  width: 100%;
   height: 40px;
   line-height: 40px;
-  font-size: 25px;	
+  font-size: 25px;
 }
 
-.control-nav .row { 
+.control-nav .row {
 	background-color: #373A3F;
 }
 
 @media screen and (max-width: 768px) {
-	.control-nav .row div:active { 
+	.control-nav .row div:active {
 		background-color: #575A5F;
 	}
 }
 
 @media screen and (min-width: 768px) {
-	.control-nav .row div:hover { 
+	.control-nav .row div:hover {
 		background-color: #575A5F;
 		cursor: pointer;
 	}
 }
-.control-nav .row div { 
+.control-nav .row div {
 	background-color: #26292a;
-	padding: 0px;	
+	padding: 0px;
 	color: #cccccc;
 }
 
 .control-nav .row a:nth-child(1) div:before {
 	font-family: 'Icons';
-	content: "\e0d5";	
+	content: "\e0d5";
 }
 
 .control-nav .row a:nth-child(2) div:before{
 	font-family: 'Icons';
-	content: "\e0d3";	
+	content: "\e0d3";
 }
 
 .colapse{
@@ -206,7 +206,7 @@ figure {
 }
 
 .collapsable {
-	z-index: 20;	
+	z-index: 20;
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -223,7 +223,7 @@ figure {
 	box-sizing: border-box;
 	border-bottom: 1px solid gray;
 	color: white;
- 	text-align: left; 
+ 	text-align: left;
 }
 
 .nav-icon {
@@ -235,14 +235,14 @@ figure {
 /*---------- HEADER ----------*/
 
 .header {
-  width: 100%;  
+  width: 100%;
   height: 40px;
   line-height: 40px;
-  font-size: 25px;	
+  font-size: 25px;
   background-color: #26292a;
   position: fixed;
   top: 0;
-  z-index: 20;
+	z-index: 20;
 }
 
 .header-right {
@@ -259,14 +259,14 @@ figure {
 .header-left {
 	color: white;
 }
-.header-right-closed {	
+.header-right-closed {
 	-webkit-transform: rotate(0deg);
 	   -moz-transform: rotate(0deg);
 		-ms-transform: rotate(0deg);
 		 -o-transform: rotate(0deg);
 			transform: rotate(0deg);
-	
-	-webkit-transition: -webkit-transform 250ms ease-out 0s;	
+
+	-webkit-transition: -webkit-transform 250ms ease-out 0s;
 	   -moz-transition: -moz-transform 250ms ease-out 0s;
 		 -o-transition: -o-transform 250ms ease-out 0s;
 		    transition: transform 250ms ease-out 0s;
@@ -274,17 +274,17 @@ figure {
 
 .header-right-open {
 	background-position: 0px -16px;
-		  
+
 	-webkit-transform: rotate(-180deg);
 	   -moz-transform: rotate(-180deg);
 		-ms-transform: rotate(-180deg);
 		 -o-transform: rotate(-180deg);
 			transform: rotate(-180deg);
-	
-	-webkit-transition: -webkit-transform 250ms ease-out 0s;	
+
+	-webkit-transition: -webkit-transform 250ms ease-out 0s;
 	   -moz-transition: -moz-transform 250ms ease-out 0s;
 		 -o-transition: -o-transform 250ms ease-out 0s;
-		    transition: transform 250ms ease-out 0s;	
+		    transition: transform 250ms ease-out 0s;
 }
 
 .col-xs-2 {
@@ -344,26 +344,26 @@ figure {
 @media screen and (max-width: 480px){
 	.letter{
 		font-size: 3em;
-	} 
+	}
 }
 
 
 @media screen and (min-width: 480px) and (max-width: 768px){
 	.letter{
 		font-size: 4em;
-	} 
+	}
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.letter{
 		font-size: 5em;
-	} 
+	}
 }
 
 @media screen and (min-width: 1024px){
 	.letter{
 		font-size: 6em;
-	} 
+	}
 }
 .letters-title{
 	font-size: 30px;
@@ -474,26 +474,26 @@ figure {
 @media screen and (max-width: 480px){
 	.home-btn {
 		font-size: 1em;
-	} 
+	}
 }
 
 
 @media screen and (min-width: 480px) and (max-width: 768px){
 	.home-btn {
 		font-size: 2em;
-	} 
+	}
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.home-btn{
 		font-size: 3em;
-	} 
+	}
 }
 
 @media screen and (min-width: 1024px){
 	.home-btn{
 		font-size: 4em;
-	} 
+	}
 }
 
 .home-btn {
@@ -502,23 +502,23 @@ figure {
 
 .help-icon:before {
 	font-family: 'Ionicons';
-	content: "\f142";	
+	content: "\f142";
 }
 
 .categories-icon:before {
 	font-family: 'Ionicons';
-	content: "\f4d5";	
+	content: "\f4d5";
 }
 
 .profile-icon:before {
 	font-family: 'Ionicons';
-	content: "\f3a0";	
+	content: "\f3a0";
 }
 
 .logout-icon:before {
 	font-family: 'Ionicons';
 	content: "\f29f";
-		
+
 }
 
 /*---------- CATEGORIES ----------*/
@@ -542,13 +542,13 @@ figure {
 }
 
 @media screen and (max-width: 768px) {
-	.category-row:active { 
+	.category-row:active {
 		background-color: #575A5F;
 	}
 }
 
 @media screen and (min-width: 768px) {
-	.category-row:hover { 
+	.category-row:hover {
 		background-color: #575A5F;
 		cursor: pointer;
 	}
@@ -575,7 +575,7 @@ figure {
 	position: relative;
 }
 
-.profile-pic-container { 
+.profile-pic-container {
 	width: 15vw;
 	padding: 15vw;
 	height: 31vw;
@@ -592,18 +592,18 @@ figure {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	position: absolute;	
+	position: absolute;
 }
 
 .profile-name-container {
 	position: absolute;
-	left: 40vw;	
+	left: 40vw;
 	width: 55vw;
 	height: 31vw;
 	text-align: left;
 	padding: 1vw;
 	border:1px solid #666666;
-		
+
 }
 
 .profile-name-container h4 {
@@ -614,10 +614,10 @@ figure {
 	position: absolute;
 }
 
-.name-text {	
+.name-text {
 	position: absolute;
 	font-size: 7vw;
-	top: 7vw;	
+	top: 7vw;
 	width: 53vw;
 	height: 22vw;
 }
@@ -631,7 +631,7 @@ figure {
 
 .profile-name-container .sup {
 	position: absolute;
-	left: 46vw;	
+	left: 46vw;
 	padding: 0.5vw;
 	margin-top: -0.5vw;
 	width: 8vw;
@@ -651,7 +651,7 @@ figure {
 	position: absolute;
 	width: 100%;
 	height:10.5vw;
-	color: #cccccc;	
+	color: #cccccc;
 	background-color:  #575A5F;
 }
 
@@ -674,7 +674,7 @@ figure {
 	padding: 1vw;
 	width: 90vw;
 	height: 20vw;
-	text-align: left;	
+	text-align: left;
 }
 
 
@@ -694,7 +694,7 @@ figure {
 
 .profile-email-container .sup {
 	position: absolute;
-	left: 81vw;	
+	left: 81vw;
 	padding: 0.5vw;
 	margin-top: -0.5vw;
 	width: 8vw;
@@ -714,7 +714,7 @@ figure {
 	width: 75%;
 	height:87%;
 	top: 10%;
-	color: #cccccc;	
+	color: #cccccc;
 	background-color:  #575A5F;
 }
 
@@ -731,7 +731,7 @@ figure {
 .email-text {
 	position: absolute;
 	font-size: 7vw;
-	top: 7vw;	
+	top: 7vw;
 	width: 88vw;
    	height: 12vw;
 }
@@ -744,7 +744,7 @@ figure {
 	padding: 1vw;
 	width: 90vw;
 	height: 20vw;
-	text-align: left;	
+	text-align: left;
 }
 
 .profile-pass-container h4 {
@@ -755,10 +755,10 @@ figure {
 	position: absolute;
 }
 
-.pass-text {	
+.pass-text {
 	position: absolute;
 	font-size: 7vw;
-	top: 7vw;	
+	top: 7vw;
 	width: 88vw;
  	-webkit-text-security: circle;
    	height: 12vw;
@@ -772,7 +772,7 @@ figure {
 
 .profile-pass-container .sup {
 	position: absolute;
-	left: 81vw;	
+	left: 81vw;
 	padding: 0.5vw;
 	margin-top: -0.5vw;
 	width: 8vw;
@@ -793,7 +793,7 @@ figure {
 	width: 75%;
 	height:87%;
 	top: 10%;
-	color: #cccccc;	
+	color: #cccccc;
 	background-color:  #575A5F;
 }
 
@@ -812,7 +812,7 @@ figure {
 		background-color: #888A8F;
 		cursor: pointer;
 	}
-	
+
 	.profile-no-pic:hover:before {
 		content: '\f2c7';
 	}
@@ -823,7 +823,7 @@ figure {
 		background-color: #888A8F;
 		cursor: pointer;
 	}
-	
+
 	.profile-no-pic:active:before {
 		content: '\f2c7';
 	}
@@ -845,7 +845,7 @@ figure {
 /*---------- LOGOUT ----------*/
 
 
-.logout-modal-yes{ 
+.modal-yes{
 	width: 40%;
 	top: 60%;
 	position: absolute;
@@ -853,13 +853,23 @@ figure {
 	height: 30%;
 	background-color:  #575A5F;
 }
-.logout-modal-no{ 
+
+.modal-no{
 	width: 40%;
 	background-color:  #575A5F;
 	left: 55%;
 	top: 60%;
 	position: absolute;
 	height: 30%;
+}
+
+.modal-ok{
+	width: 40%;
+	top: 60%;
+	position: absolute;
+	left: 30%;
+	height: 30%;
+	background-color:  #575A5F;
 }
 /*---------- HELP ----------*/
 
@@ -878,10 +888,10 @@ figure {
 }
 
 .letter-h1 {
-	font-size: 13vw;	
+	font-size: 13vw;
 	font-weight: bold;
 	text-align: center;
-	line-height: 10vh;	
+	line-height: 10vh;
 	height: 10vh;
 	margin: 1vh auto;
 }
@@ -917,20 +927,18 @@ figure {
 	right: 16.4%;
 	border-left: 2px solid  #575a5f;
 }
-.letter-btn-right:active, .letter-btn-left:active { 
+.letter-btn-right:active, .letter-btn-left:active {
 		background-color: #575A5F;
 	}
 
 .letter-btn-right:before {
 	font-family: 'Ionicons';
 	content: "\f122";
-	font-size: 6vw;	
+	font-size: 6vw;
 }
 
 .letter-btn-left:before {
 	font-family: 'Ionicons';
-	content: "\f253";	
+	content: "\f253";
 	font-size: 6vw;
 }
-
-
