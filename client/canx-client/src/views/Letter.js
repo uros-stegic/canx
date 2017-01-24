@@ -6,15 +6,15 @@ import {modalStyle} from '../modalStyle.js';
 class Letter extends React.Component {
 	constructor(...args){
 		super(...args);
-		
+		this.ctx = null;
+		this.canvas = null;
+		this.rect = null;
+		this.points = [];
+		this.lastPoint = null;
+
 		this.state = {
 			modalIsOpen: false,
-			ctx: null,
-			canvas: null,
-			rect: null,
 			strokes: [],
-			points: [],
-			lastPoint: null
 		};
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
@@ -54,64 +54,47 @@ class Letter extends React.Component {
 
 	currentPoint(x, y) {
 		return {
-			x: Math.round((x-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*this.state.canvas.width),
-			y: Math.round((y-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*this.state.canvas.height)
+			x: Math.round((x-this.rect.left)/(this.rect.right-this.rect.left)*this.canvas.width),
+			y: Math.round((y-this.rect.top)/(this.rect.bottom-this.rect.top)*this.canvas.height)
 		};
 	};
 
 	componentDidMount(){
-		let canvas = document.getElementById('canvas');
-		let rect = canvas.getBoundingClientRect();
-		let ctx = document.getElementById('canvas').getContext('2d');
-		ctx.lineWidth = 5;
-		ctx.lineJoin = ctx.lineCap = 'round';
-		ctx.strokeStyle = '#cccccc';
-		this.setState({
-				ctx: ctx,
-				canvas: canvas,
-				rect: rect
- 		});
+		this.canvas = document.getElementById('canvas');
+		this.rect = this.canvas.getBoundingClientRect();
+		this.ctx = document.getElementById('canvas').getContext('2d');
+		this.ctx.lineWidth = 5;
+		this.ctx.lineJoin = this.ctx.lineCap = 'round';
+		this.ctx.strokeStyle = '#cccccc';
 	};
 
 	onDown(x,y) {
 		let current = this.currentPoint(x, y);
-		let newPoints = this.state.points;
-		let ctx = this.state.ctx;
-		newPoints.push(current);
-		ctx.beginPath();
-		ctx.moveTo(current.x, current.y);
-		this.setState({
-				isDrawing: true,
-				points: newPoints,
-				lastPoint: current,
-				ctx: ctx
-		});
+		this.points.push(current);
+		this.lastPoint = current;
+		this.ctx.beginPath();
+		this.ctx.moveTo(current.x, current.y);
+		this.isDrawing = true;
 	};
 
 	onUp(){
 		let newStrokes = this.state.strokes;
-		newStrokes.push(this.state.points);
+		newStrokes.push(this.points);
+		this.isDrawing = false;
+		this.points = [];
+		this.lastPoint = null;
 		this.setState({
-				isDrawing: false,
-				points: [],
-				lastPoint: null,
 				strokes: newStrokes
 			});
 	};
 
 	onMove(x, y){
 		let current = this.currentPoint(x, y);
-		let points = this.state.points;
-		let ctx = this.state.ctx;
-		points.push(current);
-		let midPoint = this.midPoint(this.state.lastPoint, current);
-		ctx.quadraticCurveTo(this.state.lastPoint.x, this.state.lastPoint.y, midPoint.x, midPoint.y);
-		ctx.stroke();
-		this.setState({
-				points: points,
-				lastPoint: current,
-				ctx: ctx
-		});
+		this.points.push(current);
+		let midPoint = this.midPoint(this.lastPoint, current);
+		this.ctx.quadraticCurveTo(this.lastPoint.x, this.lastPoint.y, midPoint.x, midPoint.y);
+		this.ctx.stroke();
+		this.lastPoint = current;
 	};
 
 	handleOnMouseDown(e){
@@ -119,8 +102,8 @@ class Letter extends React.Component {
 	};
 
 	handleOnMouseMove(e){
-  	if (!this.state.isDrawing) return;
-		this.onMove(e.clientX, e.clientY);
+  	if (!this.isDrawing) return;
+			this.onMove(e.clientX, e.clientY);
 	};
 
 	handleOnMouseUp(){
@@ -136,7 +119,7 @@ class Letter extends React.Component {
 	}
 
 	handleOnTouchMove(e){
-  	if (!this.state.isDrawing) return;
+  	if (!this.isDrawing) return;
 		if(e.touches) {
 				if (e.touches.length == 1) {
             this.onMove(e.touches[0].pageX,e.touches[0].pageY);
@@ -145,7 +128,6 @@ class Letter extends React.Component {
 	}
 
 	handleOnTouchEnd(){
-		console.log("izadje touch");
 		this.onUp();
 	}
 
@@ -171,7 +153,7 @@ class Letter extends React.Component {
 				<div className='letter-btn-right' onClick={this.openModal} > </div>
 				<Modal isOpen={this.state.modalIsOpen}
 					   onRequestClose={this.closeModal}
-					   contentLabel="Logout"
+					   contentLabel="Modal"
 					   shouldCloseOnOverlayClick={true}
 					   style={modalStyle}
 					>
