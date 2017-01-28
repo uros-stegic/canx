@@ -11,13 +11,18 @@ class Letter extends React.Component {
 		this.rect = null;
 		this.points = [];
 		this.lastPoint = null;
+		this.startTime = null;
 
 		this.state = {
-			modalIsOpen: false,
+			deleteModalIsOpen: false,
+			saveModalIsOpen: false,
 			strokes: [],
 		};
-		this.openModal = this.openModal.bind(this);
+		this.openDeleteModal = this.openDeleteModal.bind(this);
+		this.openSaveModal = this.openSaveModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.clearCanvas = this.clearCanvas.bind(this);
+		this.saveCanvas = this.saveCanvas.bind(this);
 		this.handleOnMouseUp = this.handleOnMouseUp.bind(this);
 		this.handleOnMouseDown = this.handleOnMouseDown.bind(this);
 		this.handleOnMouseMove = this.handleOnMouseMove.bind(this);
@@ -29,12 +34,16 @@ class Letter extends React.Component {
 		this.onMove = this.onMove.bind(this);
 	};
 
-	openModal(){
-	 	this.setState({modalIsOpen: true});
+	openDeleteModal(){
+	 	this.setState({deleteModalIsOpen: true});
+	};
+
+	openSaveModal(){
+	 	this.setState({saveModalIsOpen: true});
 	};
 
 	closeModal(){
-		this.setState({modalIsOpen: false});
+		this.setState({deleteModalIsOpen: false, saveModalIsOpen: false});
 	};
 
 	componentWillMount(){
@@ -43,6 +52,21 @@ class Letter extends React.Component {
 
 	componentWillUnmount(){
 		document.getElementsByTagName('body')[0].style.overflow = 'scroll';
+		document.removeEventListener('onmouseup', this.handleOnMouseUp, false);
+	};
+
+	componentDidMount(){
+		document.addEventListener('onmouseup', this.handleOnMouseUp, false);
+		this.canvas = document.getElementById('canvas');
+		this.rect = this.canvas.getBoundingClientRect();
+		this.ctx = document.getElementById('canvas').getContext('2d');
+		let style = window.getComputedStyle(this.canvas);
+		this.ctx.canvas.width = parseInt(style.getPropertyValue('width'));
+		this.ctx.canvas.height = parseInt(style.getPropertyValue('height'));
+		this.ctx.lineWidth = 10;
+		this.ctx.lineJoin = 'round';
+		this.ctx.lineCap = 'round';
+		this.ctx.strokeStyle = '#cccccc';
 	};
 
 	midPoint(p1, p2) {
@@ -59,15 +83,6 @@ class Letter extends React.Component {
 		};
 	};
 
-	componentDidMount(){
-		this.canvas = document.getElementById('canvas');
-		this.rect = this.canvas.getBoundingClientRect();
-		this.ctx = document.getElementById('canvas').getContext('2d');
-		this.ctx.lineWidth = 5;
-		this.ctx.lineJoin = this.ctx.lineCap = 'round';
-		this.ctx.strokeStyle = '#cccccc';
-	};
-
 	onDown(x,y) {
 		let current = this.currentPoint(x, y);
 		this.points.push(current);
@@ -75,6 +90,7 @@ class Letter extends React.Component {
 		this.ctx.beginPath();
 		this.ctx.moveTo(current.x, current.y);
 		this.isDrawing = true;
+		this.startTime = (new Date()).getTime();
 	};
 
 	onUp(){
@@ -83,17 +99,22 @@ class Letter extends React.Component {
 		this.isDrawing = false;
 		this.points = [];
 		this.lastPoint = null;
+		newStrokes.startTime = this.startTime;
+		newStrokes.endTime = (new Date()).getTime();
 		this.setState({
 				strokes: newStrokes
 			});
+		console.log(newStrokes);
 	};
 
 	onMove(x, y){
 		let current = this.currentPoint(x, y);
-		this.points.push(current);
+
 		let midPoint = this.midPoint(this.lastPoint, current);
 		this.ctx.quadraticCurveTo(this.lastPoint.x, this.lastPoint.y, midPoint.x, midPoint.y);
 		this.ctx.stroke();
+
+		this.points.push(current);
 		this.lastPoint = current;
 	};
 
@@ -112,7 +133,7 @@ class Letter extends React.Component {
 
 	handleOnTouchStart(e){
 		if(e.touches) {
-        if (e.touches.length == 1) {
+        if (e.touches.length === 1) {
             this.onDown(e.touches[0].pageX,e.touches[0].pageY);
         }
     }
@@ -121,7 +142,7 @@ class Letter extends React.Component {
 	handleOnTouchMove(e){
   	if (!this.isDrawing) return;
 		if(e.touches) {
-				if (e.touches.length == 1) {
+				if (e.touches.length === 1) {
             this.onMove(e.touches[0].pageX,e.touches[0].pageY);
 					}
     }
@@ -131,6 +152,14 @@ class Letter extends React.Component {
 		this.onUp();
 	}
 
+	clearCanvas(){
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.closeModal();
+	}
+
+	saveCanvas(){
+		this.closeModal();
+	}
 	render(){
 
 		const argsFoot = {left: "/categories/"+this.props.args.title+"/letters/"+this.props.args.letter,
@@ -148,21 +177,36 @@ class Letter extends React.Component {
 						onTouchStart={this.handleOnTouchStart}
 						onTouchEnd={this.handleOnTouchEnd}
 						onTouchMove={this.handleOnTouchMove}
-				></canvas>
-    			<div className='letter-btn-left' onClick={this.openModal} > </div>
-				<div className='letter-btn-right' onClick={this.openModal} > </div>
-				<Modal isOpen={this.state.modalIsOpen}
+						></canvas>
+    			<div className='letter-btn-left' onClick={this.openDeleteModal} > </div>
+				<div className='letter-btn-right' onClick={this.openSaveModal} > </div>
+				<Modal isOpen={this.state.deleteModalIsOpen}
 					   onRequestClose={this.closeModal}
-					   contentLabel="Modal"
+					   contentLabel="Delete"
 					   shouldCloseOnOverlayClick={true}
 					   style={modalStyle}
 					>
 
-					<h5> Are you sure? </h5>
+					<h2> Are you sure? </h2>
 
-					<input className='modal-yes' type='button' value='Yes' onClick={this.closeModal}/>
+					<button className='modal-yes modal-trash' type='button'  onClick={this.clearCanvas}> </button>
 
-					<input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
+					<button className='modal-no modal-close' type='button' value='No' onClick={this.closeModal}> </button>
+
+				</Modal>
+
+				<Modal isOpen={this.state.saveModalIsOpen}
+						 onRequestClose={this.closeModal}
+						 contentLabel="Save"
+						 shouldCloseOnOverlayClick={true}
+						 style={modalStyle}
+					>
+
+					<h2> Are you sure? </h2>
+
+					<button className='modal-yes modal-check' type='button'  onClick={this.saveCanvas}> </button>
+
+					<button className='modal-no modal-close' type='button' value='No' onClick={this.closeModal}> </button>
 
 				</Modal>
 				<div className='footer-back'></div>

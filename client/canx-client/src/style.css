@@ -852,6 +852,7 @@ figure {
 	left: 5%;
 	height: 30%;
 	background-color:  #575A5F;
+	border: 0px solid black;
 }
 
 .modal-no{
@@ -861,6 +862,7 @@ figure {
 	top: 60%;
 	position: absolute;
 	height: 30%;
+	border: 0px solid black;
 }
 
 .modal-ok{
@@ -870,6 +872,24 @@ figure {
 	left: 30%;
 	height: 30%;
 	background-color:  #575A5F;
+}
+
+.modal-close:before {
+	font-size: 6vw;
+	font-family: 'Ionicons';
+	content: "\f12a";
+}
+
+.modal-trash:before {
+	font-size: 6vw;
+	font-family: 'Ionicons';
+	content: "\f253";
+}
+
+.modal-check:before {
+	font-size: 6vw;
+	font-family: 'Ionicons';
+	content: "\f122";
 }
 /*---------- HELP ----------*/
 
