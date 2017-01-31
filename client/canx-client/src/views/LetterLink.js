@@ -7,7 +7,7 @@ function LetterLink(props) {
     		<Link className='letter-link' to={"/categories/"+props.args.title.toLowerCase()+"/letters/"+props.args.letter} >
     			<div className="letter-container">
     			   	<div className="letter">
-    				{props.args.letter}
+    				      {props.args.letter}
     		   		</div>
     	   		</div>
     		 </Link>

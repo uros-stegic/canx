@@ -55,8 +55,8 @@ class Home extends React.Component {
 				   contentLabel="Logout"
 				   shouldCloseOnOverlayClick={true}
 				   style={modalStyle}>
-           
-	      <h5> Are you sure? </h5>
+
+	      <h2> Are you sure? </h2>
         <input className='modal-yes' type='button' value='Yes' onClick={this.closeModal}/>
         <input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
       </Modal>

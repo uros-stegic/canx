@@ -59,7 +59,7 @@ class Letter extends React.Component {
 		document.addEventListener('onmouseup', this.handleOnMouseUp, false);
 		this.canvas = document.getElementById('canvas');
 		this.rect = this.canvas.getBoundingClientRect();
-		this.ctx = document.getElementById('canvas').getContext('2d');
+		this.ctx = this.canvas.getContext('2d');
 		let style = window.getComputedStyle(this.canvas);
 		this.ctx.canvas.width = parseInt(style.getPropertyValue('width'));
 		this.ctx.canvas.height = parseInt(style.getPropertyValue('height'));
@@ -77,34 +77,37 @@ class Letter extends React.Component {
 	};
 
 	currentPoint(x, y) {
-		return {
-			x: Math.round((x-this.rect.left)/(this.rect.right-this.rect.left)*this.canvas.width),
-			y: Math.round((y-this.rect.top)/(this.rect.bottom-this.rect.top)*this.canvas.height)
-		};
+			return {
+				x: Math.round((x-this.rect.left)/(this.rect.right-this.rect.left)*this.canvas.width),
+				y: Math.round((y-this.rect.top)/(this.rect.bottom-this.rect.top)*this.canvas.height)
+			};
 	};
 
 	onDown(x,y) {
 		let current = this.currentPoint(x, y);
 		this.points.push(current);
 		this.lastPoint = current;
-		this.ctx.beginPath();
-		this.ctx.moveTo(current.x, current.y);
 		this.isDrawing = true;
 		this.startTime = (new Date()).getTime();
+		this.ctx.beginPath();
+		this.ctx.arc(current.x, current.y, 1, 0, 2 * Math.PI, true);
+		this.ctx.stroke();
+		this.ctx.beginPath();
+		this.ctx.moveTo(current.x, current.y);
 	};
 
 	onUp(){
-		let newStrokes = this.state.strokes;
-		newStrokes.push(this.points);
+		let newStrokes = {
+			points: this.points,
+			startTime: this.startTime,
+			endTime: (new Date()).getTime()
+		};
 		this.isDrawing = false;
 		this.points = [];
 		this.lastPoint = null;
-		newStrokes.startTime = this.startTime;
-		newStrokes.endTime = (new Date()).getTime();
 		this.setState({
-				strokes: newStrokes
+				strokes: [ ...this.state.strokes, newStrokes]
 			});
-		console.log(newStrokes);
 	};
 
 	onMove(x, y){
@@ -124,7 +127,7 @@ class Letter extends React.Component {
 
 	handleOnMouseMove(e){
   	if (!this.isDrawing) return;
-			this.onMove(e.clientX, e.clientY);
+		this.onMove(e.clientX, e.clientY);
 	};
 
 	handleOnMouseUp(){
@@ -132,20 +135,16 @@ class Letter extends React.Component {
 	};
 
 	handleOnTouchStart(e){
-		if(e.touches) {
-        if (e.touches.length === 1) {
+		if(e.touches)
+        if (e.touches.length === 1)
             this.onDown(e.touches[0].pageX,e.touches[0].pageY);
-        }
-    }
-	}
+  }
 
 	handleOnTouchMove(e){
   	if (!this.isDrawing) return;
-		if(e.touches) {
-				if (e.touches.length === 1) {
+		if(e.touches)
+				if (e.touches.length === 1)
             this.onMove(e.touches[0].pageX,e.touches[0].pageY);
-					}
-    }
 	}
 
 	handleOnTouchEnd(){
@@ -160,10 +159,12 @@ class Letter extends React.Component {
 	saveCanvas(){
 		this.closeModal();
 	}
+
 	render(){
 
-		const argsFoot = {left: "/categories/"+this.props.args.title+"/letters/"+this.props.args.letter,
-						  right: "/categories/"+this.props.args.title+"/letters/"+this.props.args.letter};
+		const argsFoot = {left: "/categories/"+this.props.args.title+"/letters/"+this.props.args.before,
+						  				right: "/categories/"+this.props.args.title+"/letters/"+this.props.args.after,
+											onClick: this.clearCanvas};
 		return (
 		<div className='letter-page'>
 				<h1 className='letter-h1'>
@@ -210,7 +211,7 @@ class Letter extends React.Component {
 
 				</Modal>
 				<div className='footer-back'></div>
-				<Footer args={argsFoot} />
+				<Footer args={argsFoot}/>
 
 			</div>
 		);
