@@ -1,14 +1,20 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import Letter from '../views/Letter';
+import { getBeforeLetter, getAfterLetter} from '../utils';
 
-class LetterContainer extends React.Component {
-	render(){
-		const args = {letter: this.props.params.letter,
-					  			title: this.props.params.category};
-		return (
-    		<Letter args={args} />
-		);
-	};
+const mapStateToProps = (state, ownProps) => {
+  return {
+		args: {
+	    letter: ownProps.params.letter,
+			before: getBeforeLetter(state.categories, ownProps.params),
+			after: getAfterLetter(state.categories, ownProps.params),
+			title: ownProps.params.category
+		}
+  }
 }
+
+const LetterContainer = connect(
+  mapStateToProps
+)(Letter)
 
 export default LetterContainer;

@@ -50,7 +50,7 @@ class Register extends React.Component {
                contentLabel="Register"
                shouldCloseOnOverlayClick={true}
                style={modalStyle}>
-            <h5> Success! </h5>
+            <h2> Success! </h2>
             <input className='modal-ok' type='button' value='OK' onClick={this.closeModal}/>
           </Modal>
     		</div>
