@@ -5,3 +5,6 @@
 /api/users/ UsersR GET POST
 /api/users/#UserId UserR GET PUT DELETE
 
+/api/categories/ CategoriesR GET POST
+/api/categories/#CategoryId CategoryR GET PUT DELETE
+
