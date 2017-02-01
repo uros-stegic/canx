@@ -22,16 +22,12 @@ getCategoryR id' = do
     category <- runDB $ selectFirst [CategoryId ==. id'] []
     returnJson category
 
--- Changing some category
--- TODO
+-- TODO: This solution requires a whole object to be sent.
 putCategoryR :: CategoryId -> Handler Value
 putCategoryR id' = do
-    category <- runDB $ selectFirst [CategoryId ==. id'] []
+    category <- requireJsonBody :: Handler Category
+    runDB $ replace id' category
     returnJson category
---    requestBody <- requireJsonBody :: Handler Category
---    let category = requestBody { userEmail = Just "nothing" }
---    category <- runDB $ updateGet id' [requestBody]
---    returnJson category
 
 -- Removing some category
 deleteCategoryR :: CategoryId -> Handler Value

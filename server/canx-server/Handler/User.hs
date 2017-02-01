@@ -25,10 +25,18 @@ getUserR id' = do
 -- Changing some user
 putUserR :: UserId -> Handler Value
 putUserR id' = do
-    requestBody <- requireJsonBody :: Handler User
-    let user = requestBody { userEmail = Just "nothing" }
+    person <- requireJsonBody :: Handler User
+    t <- runDB $ replace id' person
+    sendResponseStatus status200 ("UPDATED" :: Text)
+
+    {-elem <- parseJsonBody requestBody-}
+    {-t <- runDB $ update id' [ UserEmail =. Just "Test" ]-}
+    {-t <- runDB $ update id' requestBody-}
+    {-let user = requestBody-}
+    {-t <- runDB $ update id' [ Update user ]-}
+    {-let user = requestBody { userEmail = Just "nothing" }-}
 --    user <- runDB $ updateGet id' [requestBody]
-    returnJson user
+    {-returnJson t-}
 
 -- Removing some user
 deleteUserR :: UserId -> Handler Value
