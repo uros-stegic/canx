@@ -1,5 +1,5 @@
-import React from 'react';
-import Header from './Header';
+import React from 'react' 
+import Header from './Header' 
 
 function MainLayout(props) {
    	return (
@@ -8,7 +8,7 @@ function MainLayout(props) {
     			<div className='footer-back'></div>
     			{props.children}
   	   </div>
-    );
+    ) 
 }
 
-export default MainLayout;
+export default MainLayout 

@@ -1,25 +1,25 @@
-import React from 'react';
-import Modal from 'react-modal';
-import {modalStyle} from '../modalStyle';
+import React from 'react' 
+import Modal from 'react-modal' 
+import {modalStyle} from '../style/modalStyle' 
 
 class Register extends React.Component {
-    constructor(...args){
-      super(...args);
+    constructor(...args) {
+      super(...args) 
       this.state = {
         openModal: false
-      };
-      this.openModal = this.openModal.bind(this);
-      this.closeModal = this.closeModal.bind(this);
-    };
+      } 
+      this.openModal = this.openModal.bind(this) 
+      this.closeModal = this.closeModal.bind(this) 
+    } 
 
-    openModal(e){
-      e.preventDefault();
-      this.setState({openModal: true});
-    };
+    openModal(e) {
+      e.preventDefault() 
+      this.setState({openModal: true}) 
+    } 
 
-    closeModal(){
-      this.setState({openModal: false});
-    };
+    closeModal() {
+      this.setState({openModal: false}) 
+    } 
 
    render() {
      	return (
@@ -54,8 +54,8 @@ class Register extends React.Component {
             <input className='modal-ok' type='button' value='OK' onClick={this.closeModal}/>
           </Modal>
     		</div>
-        );
-      };
+        ) 
+      } 
 }
 
-export default Register;
+export default Register 

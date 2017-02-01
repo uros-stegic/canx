@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react' 
+import {Link} from 'react-router' 
 
 function Footer(props) {
     return (
@@ -9,7 +9,7 @@ function Footer(props) {
             <Link to={props.args.right} onClick={props.args.onClick}> <div className=" col-xs-2 col-sm-2 col-xs-offset-8 col-sm-offset-8 "> </div> </Link>
         </div>
     </div>
-);
+) 
 }
 
-export default Footer;
+export default Footer 

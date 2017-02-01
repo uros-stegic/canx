@@ -1,30 +1,30 @@
-import React from 'react';
-import {Link} from 'react-router';
-import Modal from 'react-modal';
-import {modalStyle} from '../modalStyle';
+import React from 'react' 
+import {Link} from 'react-router' 
+import Modal from 'react-modal' 
+import {modalStyle} from '../style/modalStyle' 
 
 class Header extends React.Component {
-   	constructor(...args){
-		super(...args);
+   	constructor(...args) {
+		super(...args) 
 		this.state = {
 			open: false,
       openLogoutModal: false
 		}
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-	};
+    this.openModal = this.openModal.bind(this) 
+    this.closeModal = this.closeModal.bind(this) 
+	} 
 
-	toggleOpen(){
-		return () => this.setState({open: !this.state.open});
-	};
+	toggleOpen() {
+		return () => this.setState({open: !this.state.open}) 
+	} 
 
-  openModal(){
-	 	this.setState({openLogoutModal: true, open: false});
-	};
+  openModal() {
+	 	this.setState({openLogoutModal: true, open: false}) 
+	} 
 
-	closeModal(){
-		this.setState({openLogoutModal: false, open: false});
-	};
+	closeModal() {
+		this.setState({openLogoutModal: false, open: false}) 
+	} 
 
 	render() {
 		return (
@@ -53,7 +53,7 @@ class Header extends React.Component {
   				<input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
   			</Modal>
  		</div>
-	);}
+	) }
 }
 
-export default Header;
+export default Header 

@@ -1,38 +1,38 @@
-import React from 'react';
-import Modal from 'react-modal';
-import {modalStyle} from '../modalStyle';
+import React from 'react' 
+import Modal from 'react-modal' 
+import {modalStyle} from '../style/modalStyle' 
 
 class Profile extends React.Component {
     constructor(...args){
-		super(...args);
+		super(...args) 
 		this.state = {
 			openName: false,
 			openEmail: false,
 			openPass: false,
       openModal: false
-    };
-      this.openModal = this.openModal.bind(this);
-      this.closeModal = this.closeModal.bind(this);
-	  };
+    } 
+      this.openModal = this.openModal.bind(this) 
+      this.closeModal = this.closeModal.bind(this) 
+	  } 
 
     unsetOpen(opened) {
 		  return () => {
-        this.setState({[opened] : false});
-        this.openModal();
+        this.setState({[opened] : false}) 
+        this.openModal() 
       }
-    };
+    } 
 
    toggleOpen(opened) {
-      return () => this.setState({[opened] : !this.state[opened]});
-   };
+      return () => this.setState({[opened] : !this.state[opened]}) 
+   } 
 
-   openModal(){
-     this.setState({openModal: true});
-   };
+   openModal() {
+     this.setState({openModal: true}) 
+   } 
 
-   closeModal(){
-     this.setState({openModal: false});
-   };
+   closeModal() {
+     this.setState({openModal: false}) 
+   } 
 
    render() {
 	   	return (
@@ -86,8 +86,8 @@ class Profile extends React.Component {
         <input className='modal-no' type='button' value='NO' onClick={this.closeModal}/>
       </Modal>
 		 </div>
-	  );
+	  ) 
   }
 }
 
-export default Profile;
+export default Profile 

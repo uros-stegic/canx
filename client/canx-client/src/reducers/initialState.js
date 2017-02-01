@@ -1,5 +1,4 @@
-
-export let store = {
+export default {
 			categories: [
 						{ name: "Uppercase",
 						 	value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
@@ -11,14 +10,13 @@ export let store = {
 						 	value: "[]{}().*/\\!@#$%^&_-+=><" }
 						],
 			user : {
+				jwt: '123123',
 				id : 1,
 				name: 'Pera Peric',
 				email: 'pera@peric.com',
 				pass: '123456',
-				avatar: ''
-			}
-};
-
-export function initialStore(state = [], action){
-	return state;
+				avatar: '',
+        draw: {}
+			},
+      logged: !!localStorage.jwt,
 }

@@ -1,28 +1,28 @@
-import React from 'react';
-import Modal from 'react-modal';
-import {Link} from 'react-router';
-import Logo from './Logo';
-import {modalStyle} from '../modalStyle';
+import React from 'react' 
+import Modal from 'react-modal' 
+import {Link} from 'react-router' 
+import Logo from './Logo' 
+import {modalStyle} from '../style/modalStyle' 
 
 class Home extends React.Component {
-   	constructor(...args){
-		super(...args);
+   	constructor(...args) {
+		super(...args) 
 		this.state = {
 			openLogoutModal: false
-		};
-		this.openModal = this.openModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
-	};
+		} 
+		this.openModal = this.openModal.bind(this) 
+		this.closeModal = this.closeModal.bind(this) 
+	} 
 
-  openModal(){
-	 	this.setState({openLogoutModal: true});
-	};
+  openModal() {
+	 	this.setState({openLogoutModal: true}) 
+	} 
 
-	closeModal(){
-		this.setState({openLogoutModal: false});
-	};
+	closeModal() {
+		this.setState({openLogoutModal: false}) 
+	} 
 
-	render(){
+	render() {
 		return (
 		<div className='home-container'>
 
@@ -61,7 +61,7 @@ class Home extends React.Component {
         <input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
       </Modal>
     </div>
-    );}
+    ) }
 }
 
-export default Home;
+export default Home 

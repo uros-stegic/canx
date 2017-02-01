@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react' 
+import {Link} from 'react-router' 
 import Logo from './Logo'
 
 function IndexPage(props) {
@@ -11,7 +11,7 @@ function IndexPage(props) {
     		<Link to='/login'> <div className="indeks-btn"> LOGIN </div> </Link>
     		<Link to='/register'><div className="indeks-btn">  REGISTER </div></Link>
 	    </div>
-    );
+    ) 
 }
 
-export default IndexPage;
+export default IndexPage 

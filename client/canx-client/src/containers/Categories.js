@@ -1,9 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react' 
+import {Link} from 'react-router' 
 
 class Categories extends React.Component {
-   	constructor(...args){
-		super(...args);
+   	constructor(...args) {
+		super(...args) 
 		this.state = {
 			categories: [{name: "Uppercase",
 						  value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -18,9 +18,9 @@ class Categories extends React.Component {
 						   value: "[]{}().*/\\!@#$%^&_-+=><"
 							}]
 		}
-	};
+	} 
 
-	render(){
+	render() {
 		return (
     	  <div className='category-container'>
 			     <h1 className='profile-title'>CATEGORIES</h1>
@@ -28,8 +28,8 @@ class Categories extends React.Component {
                                                         <div className='category-row'> {cat.name} </div>
                                                       </Link>)}
 		  </div>
-    	);
-	};
+    	) 
+	} 
 }
 
-export default Categories;
+export default Categories 

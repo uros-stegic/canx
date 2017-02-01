@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react' 
 
 function Login(props) {
    	return (
@@ -16,7 +16,7 @@ function Login(props) {
 				<input type='submit' className='btn form-group login-btn sign-group' value='LOGIN' />
 			</form>
 		</div>
-    );
+    ) 
 }
 
-export default Login;
+export default Login 

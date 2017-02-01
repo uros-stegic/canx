@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react' 
+import {Link} from 'react-router' 
 
 function LetterLink(props) {
    	return (
@@ -12,7 +12,7 @@ function LetterLink(props) {
     	   		</div>
     		 </Link>
   	  </div>
-    );
+    ) 
 }
 
-export default LetterLink;
+export default LetterLink 

@@ -15,4 +15,4 @@ export const modalStyle = {
   overlay : {
     zIndex                : '100'
   }
-};
+} 

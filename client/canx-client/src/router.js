@@ -1,34 +1,28 @@
-import React from 'react';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
 
 // Containers
-import LetterContainer from './containers/LetterContainer';
-import CategoryContainer from './containers/CategoryContainer';
-import ProfileContainer from './containers/ProfileContainer';
-import Categories from './containers/Categories';
+import LetterContainer from './containers/LetterContainer'
+import CategoryContainer from './containers/CategoryContainer'
+import ProfileContainer from './containers/ProfileContainer'
+import Categories from './containers/Categories'
 
 // Views
-import Login from './views/Login';
-import Home from './views/Home';
-import MainLayout from './views/MainLayout';
-import IndexPage from './views/IndexPage';
-import Register from './views/Register';
-import Help from './views/Help';
-import NotFound from './views/NotFound';
-import { Provider } from 'react-redux';
+import Login from './views/Login'
+import Home from './views/Home'
+import MainLayout from './views/MainLayout'
+import IndexPage from './views/IndexPage'
+import Register from './views/Register'
+import Help from './views/Help'
+import NotFound from './views/NotFound'
+
+// Auth
+import auth from './auth/authentication';
 
 // Style
-import './style.css';
-
-// Store
-import {store, initialStore} from './store';
-import { createStore } from 'redux';
-
-let createdStore = createStore(initialStore, store);
+import './style/style.css'
 
 export default (
-	<Provider store={createdStore}>
-		<Router history={browserHistory}>
 			<Route path='/'>
 				<IndexRoute component={IndexPage}/>
 				<Route component={MainLayout}>
@@ -39,12 +33,20 @@ export default (
 						<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
 					</Route>
 					<Route path='/profile' component={ProfileContainer}/>
-					<Route path='/help' component={Help}/>
+					<Route path='/help' component={Help} onEnter={requireAuth}/>
 				</Route>
 				<Route path='/login' component={Login} />
 				<Route path='/register' component={Register} />
+				<Route path='*' component={NotFound} />
 			</Route>
-			<Route path='*' component={NotFound} />
-		</Router>
-  </Provider>
-);
+)
+
+function requireAuth(nextState, replace) {
+  console.log(auth.loggedIn());
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
