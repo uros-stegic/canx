@@ -6,11 +6,14 @@ import {createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
+import {loadCategories} from './actions/categoriesActions';
 
 let createdStore = createStore(
     rootReducer,
     applyMiddleware(thunk)
 )
+
+createdStore.dispatch(loadCategories())
 
 ReactDOM.render(
   <Provider store={createdStore}>

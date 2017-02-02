@@ -1,7 +1,7 @@
 class ProfileApi {
 
   static requestHeaders() {
-    return {'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
+    return {}//AUTHORIZATION': `Bearer ${localStorage.jwt}`}
   }
 
   static update(user) {
@@ -21,10 +21,10 @@ class ProfileApi {
 
   static register(user) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
-    const request = new Request(`http://localhost:3000/api/user`, {
+    const request = new Request(`http://localhost:3000/api/users`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({user: user})
+      body: JSON.stringify(user)
     })
 
     return fetch(request).then(response => {

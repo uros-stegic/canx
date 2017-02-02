@@ -3,6 +3,12 @@ module Handler.User where
 import Import
 import Data.List ()
 
+optionsUsersR :: Handler RepPlain
+optionsUsersR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+    return $ RepPlain $ toContent ("" :: Text)
+
 -- Fetching list of users
 getUsersR :: Handler Value
 getUsersR = do
@@ -12,6 +18,7 @@ getUsersR = do
 -- Creating new user
 postUsersR :: Handler Value
 postUsersR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     requestBody <- runDB $ requireJsonBody :: Handler User
     user <- runDB $ insertEntity requestBody
     returnJson user
@@ -43,5 +50,3 @@ deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do
     ok <- runDB $ delete id'
     returnJson ok
-    
-

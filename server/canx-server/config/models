@@ -9,3 +9,4 @@ User json
 
 Category json
     name Text
+    letters [Text]

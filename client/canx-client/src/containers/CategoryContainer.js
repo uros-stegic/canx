@@ -1,8 +1,8 @@
-import { connect } from 'react-redux' 
-import Category from '../views/Category' 
-import { getFilteredCategory, getBeforeCategory, getAfterCategory} from '../utils' 
+import { connect } from 'react-redux'
+import Category from '../views/Category'
+import { getFilteredCategory, getBeforeCategory, getAfterCategory} from '../utils'
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps(state, ownProps) {
   return {
 		args: {
 	    category: getFilteredCategory(state.categories, ownProps.params.category),
@@ -17,4 +17,4 @@ const CategoryContainer = connect(
 )(Category)
 
 
-export default CategoryContainer 
+export default CategoryContainer

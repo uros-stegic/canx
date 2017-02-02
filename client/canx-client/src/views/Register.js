@@ -1,25 +1,76 @@
-import React from 'react' 
-import Modal from 'react-modal' 
-import {modalStyle} from '../style/modalStyle' 
+import React from 'react'
+import Modal from 'react-modal'
+import {modalStyle} from '../style/modalStyle'
+import {testEmail, testPass, testConfirmPass} from '../utils'
+import {bindActionCreators} from 'redux'
+import { connect } from 'react-redux'
+import * as registerActions from '../actions/profileActions'
+import md5 from 'js-md5'
 
 class Register extends React.Component {
     constructor(...args) {
-      super(...args) 
+      super(...args)
       this.state = {
         openModal: false
-      } 
-      this.openModal = this.openModal.bind(this) 
-      this.closeModal = this.closeModal.bind(this) 
-    } 
+      }
+      this.user = {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      }
+      this.openModal = this.openModal.bind(this)
+      this.closeModal = this.closeModal.bind(this)
+      this.onBlur = this.onBlur.bind(this)
+      this.createUser = this.createUser.bind(this)
+    }
 
     openModal(e) {
-      e.preventDefault() 
-      this.setState({openModal: true}) 
-    } 
+      e.preventDefault()
+      this.setState({openModal: true})
+    }
 
     closeModal() {
-      this.setState({openModal: false}) 
-    } 
+      this.setState({openModal: false})
+    }
+
+    createUser(e) {
+        e.preventDefault()
+        this.props.actions.register({ name: this.user.name,
+                                      email: this.user.email,
+                                      password: md5(this.user.password),
+                                      avatar: "",
+                                      ident: ""
+        })
+        this.closeModal
+    }
+
+    onBlur(ev) {
+      let name = ev.target.name
+
+      switch (name) {
+        case "email":
+          if(testEmail(ev.target.value) === false){
+            ev.target.classList.add('btn-err')
+            return
+          }
+          break;
+        case "password":
+          if(testPass(ev.target.value, document.querySelector("input[name='password']").value) === false){
+            ev.target.classList.add('btn-err')
+            return
+          }
+          break;
+        case "confirmPassword":
+          if(testConfirmPass(ev.target.value) === false){
+            ev.target.classList.add('btn-err')
+            return
+          }
+          break;
+      }
+      ev.target.classList.remove('btn-err')
+      this.user[name] = ev.target.value
+    }
 
    render() {
      	return (
@@ -28,19 +79,19 @@ class Register extends React.Component {
     			<form>
     				<div className='form-group sign-group'>
     						<label> Name and surname: </label>
-    						<input type='text' name='name' className='form-control'/>
+    						<input type='text' name='name' onBlur={this.onBlur} className='form-control'/>
     				</div>
     				<div className='form-group sign-group'>
     						<label> Email: </label>
-    						<input type='email' name='email' className='form-control'/>
+    						<input type='email' name='email' onBlur={this.onBlur} className='form-control'/>
     				</div>
     				<div className='form-group sign-group'>
     						<label> Password: </label>
-    						<input type='password' name='password' className='form-control'/>
+    						<input type='password' name='password' onBlur={this.onBlur} className='form-control'/>
     				</div>
     				<div className='form-group sign-group'>
     						<label> Confirm password: </label>
-    						<input type='password' name='confitmPassword' className='form-control'/>
+    						<input type='password' name='confirmPassword' onBlur={this.onBlur} className='form-control'/>
     				</div>
     				<input type='submit' onClick={this.openModal} className='btn form-group login-btn sign-group' value='REGISTER' />
     			</form>
@@ -50,12 +101,28 @@ class Register extends React.Component {
                contentLabel="Register"
                shouldCloseOnOverlayClick={true}
                style={modalStyle}>
-            <h2> Success! </h2>
-            <input className='modal-ok' type='button' value='OK' onClick={this.closeModal}/>
+            <ul className='modal-register-list'>
+              <li> Name: {this.user.name} </li>
+              <li> Email: {this.user.email} </li>
+              <li> Password length: {this.user.password.length} </li>
+            </ul>
+            <div className='modal-register-title'> Are you sure? </div>
+            <input className='modal-yes  modal-check' type='button' onClick={this.createUser}/>
+            <input className='modal-no  modal-close' type='button' onClick={this.closeModal}/>
           </Modal>
     		</div>
-        ) 
-      } 
+        )
+      }
 }
 
-export default Register 
+function mapStateToProps(state, ownProps) {
+  return state
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(registerActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

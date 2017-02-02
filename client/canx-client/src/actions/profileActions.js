@@ -14,3 +14,17 @@ export function updateProfile(user) {
     })
   }
 }
+
+export function registerSuccess(user) {
+  return {type: types.UPDATE_PROFILE_SUCCESS, user}
+}
+
+export function register(user) {
+  return function (dispatch) {
+    return profileApi.register(user).then(user => {
+      dispatch(registerSuccess(user));
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}

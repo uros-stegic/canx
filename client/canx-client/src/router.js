@@ -5,7 +5,7 @@ import { Route, IndexRoute } from 'react-router'
 import LetterContainer from './containers/LetterContainer'
 import CategoryContainer from './containers/CategoryContainer'
 import ProfileContainer from './containers/ProfileContainer'
-import Categories from './containers/Categories'
+import CategoriesContainer from './containers/CategoriesContainer'
 
 // Views
 import Login from './views/Login'
@@ -28,7 +28,7 @@ export default (
 				<Route component={MainLayout}>
 					<Route path='/home' component={Home}/>
 					<Route path='/categories'>
-						<IndexRoute component={Categories}/>
+						<IndexRoute component={CategoriesContainer}/>
 						<Route path='/categories/:category' component={CategoryContainer} />
 						<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
 					</Route>

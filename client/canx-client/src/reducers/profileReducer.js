@@ -20,7 +20,7 @@ export default function profileReducer(state = initialState.user, action) {
     }
     case types.UPDATE_PASS_SUCCESS: {
       const newState = Object.assign({}, state)
-      newState.user.pass = action.pass 
+      newState.user.pass = action.pass
       return newState
     }
     default:

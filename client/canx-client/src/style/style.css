@@ -58,6 +58,10 @@ input {
 	color: #cccccc ;
 }
 
+.btn-err {
+	background-color: #ce4c4c !important;
+}
+
 .btn:active {
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6) ;
 	color: white ;
@@ -393,8 +397,16 @@ figure {
 		width: 90% ;
 	}
 }
-/*---------- SIGN ----------*/
 
+.modal-register-list {
+	text-align: left;
+	margin-bottom: 1px;
+}
+
+.modal-register-title {
+	font-weight: bold;
+}
+/*---------- SIGN ----------*/
 
 .sign-group {
 	margin: auto ;

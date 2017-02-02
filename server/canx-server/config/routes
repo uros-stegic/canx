@@ -2,9 +2,8 @@
 
 / HomeR GET POST
 
-/api/users/ UsersR GET POST
+/api/users/ UsersR GET POST OPTIONS
 /api/users/#UserId UserR GET PUT DELETE
 
-/api/categories/ CategoriesR GET POST
+/api/categories/ CategoriesR GET POST OPTIONS
 /api/categories/#CategoryId CategoryR GET PUT DELETE
-

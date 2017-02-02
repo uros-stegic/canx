@@ -13,7 +13,6 @@ class AuthApi {
     }).catch(error => {
       return error
     })
-  }
 }
 
 export default AuthApi

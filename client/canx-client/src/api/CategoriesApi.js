@@ -1,6 +1,6 @@
 class CategoriesApi {
   static requestHeaders() {
-    return {'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
+    return {}//'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
   }
 
   static getAllCategories() {
@@ -10,8 +10,9 @@ class CategoriesApi {
       headers: headers
     })
     return fetch(request).then(response => {
-      return response.json()
-    }).catch(error => {
+      return response.json().then( res =>
+          res.map((cat) => { return {name: cat.name, value: cat.letters.join("")}})
+    )}).catch(error => {
       return error
     });
   }
