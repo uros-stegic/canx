@@ -14,5 +14,6 @@ class AuthApi {
       return error
     })
 }
+}
 
 export default AuthApi

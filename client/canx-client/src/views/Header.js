@@ -1,30 +1,31 @@
-import React from 'react' 
-import {Link} from 'react-router' 
-import Modal from 'react-modal' 
-import {modalStyle} from '../style/modalStyle' 
+import React from 'react'
+import {Link} from 'react-router'
+import LogoutModal from './LogoutModal'
+
+// TODO: borders merge when navigation uncollapse
 
 class Header extends React.Component {
    	constructor(...args) {
-		super(...args) 
+		super(...args)
 		this.state = {
 			open: false,
       openLogoutModal: false
 		}
-    this.openModal = this.openModal.bind(this) 
-    this.closeModal = this.closeModal.bind(this) 
-	} 
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+	}
 
 	toggleOpen() {
-		return () => this.setState({open: !this.state.open}) 
-	} 
+		return () => this.setState({open: !this.state.open})
+	}
 
   openModal() {
-	 	this.setState({openLogoutModal: true, open: false}) 
-	} 
+	 	this.setState({openLogoutModal: true, open: false})
+	}
 
 	closeModal() {
-		this.setState({openLogoutModal: false, open: false}) 
-	} 
+		this.setState({openLogoutModal: false, open: false})
+	}
 
 	render() {
 		return (
@@ -43,17 +44,11 @@ class Header extends React.Component {
           <div className={this.state.open ? 'clear-dropdown' : ''}> </div>
 		    </div>
 
-        <Modal isOpen={this.state.openLogoutModal}
-  				   onRequestClose={this.closeModal}
-  				   contentLabel="Logout"
-  				   shouldCloseOnOverlayClick={true}
-  				   style={modalStyle}>
-  				<h2> Are you sure? </h2>
-  				<input className='modal-yes' type='button' value='Yes' onClick={this.closeModal}/>
-  				<input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
-  			</Modal>
- 		</div>
+        <LogoutModal args={{openModal: this.openModal,
+                           closeModal: this.closeModal,
+                           isOpen: this.state.openLogoutModal}} />
+   		</div>
 	) }
 }
 
-export default Header 
+export default Header

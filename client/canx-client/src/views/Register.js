@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import {modalStyle} from '../style/modalStyle'
-import {testEmail, testPass, testConfirmPass} from '../utils'
+import {testName, testEmail, testPass, testConfirmPass} from '../utils'
 import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
 import * as registerActions from '../actions/profileActions'
@@ -36,19 +36,28 @@ class Register extends React.Component {
 
     createUser(e) {
         e.preventDefault()
-        this.props.actions.register({ name: this.user.name,
-                                      email: this.user.email,
-                                      password: md5(this.user.password),
-                                      avatar: "",
-                                      ident: ""
-        })
-        this.closeModal
+        if(testName(this.user.name) && testEmail(this.user.email) && testPass(this.user.password) && testConfirmPass(this.user.password, this.user.confirmPassword))
+          this.props.actions.register({ name: this.user.name,
+            email: this.user.email,
+            password: md5(this.user.password),
+            avatar: "",
+            ident: ""
+          })
+
+        this.closeModal()
+
     }
 
     onBlur(ev) {
       let name = ev.target.name
 
       switch (name) {
+        case "name":
+          if(testName(name) === false){
+            ev.target.classList.add('btn-err')
+            return
+          }
+          break;
         case "email":
           if(testEmail(ev.target.value) === false){
             ev.target.classList.add('btn-err')
@@ -107,16 +116,12 @@ class Register extends React.Component {
               <li> Password length: {this.user.password.length} </li>
             </ul>
             <div className='modal-register-title'> Are you sure? </div>
-            <input className='modal-yes  modal-check' type='button' onClick={this.createUser}/>
-            <input className='modal-no  modal-close' type='button' onClick={this.closeModal}/>
+            <button className='modal-yes  modal-check' onClick={this.createUser}> </button>
+            <button className='modal-no  modal-close' onClick={this.closeModal}> </button>
           </Modal>
     		</div>
         )
       }
-}
-
-function mapStateToProps(state, ownProps) {
-  return state
 }
 
 function mapDispatchToProps(dispatch) {
@@ -125,4 +130,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default connect(null, mapDispatchToProps)(Register)

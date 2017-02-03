@@ -1,26 +1,25 @@
-import React from 'react' 
-import Modal from 'react-modal' 
-import {Link} from 'react-router' 
-import Logo from './Logo' 
-import {modalStyle} from '../style/modalStyle' 
+import React from 'react'
+import {Link} from 'react-router'
+import Logo from './Logo'
+import LogoutModal from './LogoutModal'
 
 class Home extends React.Component {
    	constructor(...args) {
-		super(...args) 
+		super(...args)
 		this.state = {
 			openLogoutModal: false
-		} 
-		this.openModal = this.openModal.bind(this) 
-		this.closeModal = this.closeModal.bind(this) 
-	} 
+		}
+		this.openModal = this.openModal.bind(this)
+		this.closeModal = this.closeModal.bind(this)
+	}
 
   openModal() {
-	 	this.setState({openLogoutModal: true}) 
-	} 
+	 	this.setState({openLogoutModal: true})
+	}
 
 	closeModal() {
-		this.setState({openLogoutModal: false}) 
-	} 
+		this.setState({openLogoutModal: false})
+	}
 
 	render() {
 		return (
@@ -50,18 +49,12 @@ class Home extends React.Component {
 						<div className='logout-icon home-btn'> </div>
 	   			 	</div>
 			</div>
-			<Modal isOpen={this.state.openLogoutModal}
-				   onRequestClose={this.closeModal}
-				   contentLabel="Logout"
-				   shouldCloseOnOverlayClick={true}
-				   style={modalStyle}>
 
-	      <h2> Are you sure? </h2>
-        <input className='modal-yes' type='button' value='Yes' onClick={this.closeModal}/>
-        <input className='modal-no' type='button' value='No' onClick={this.closeModal}/>
-      </Modal>
-    </div>
+      <LogoutModal args={{openModal: this.openModal,
+                         closeModal: this.closeModal,
+                         isOpen: this.state.openLogoutModal}} />
+		</div>
     ) }
 }
 
-export default Home 
+export default Home

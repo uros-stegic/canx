@@ -1,4 +1,8 @@
 class Auth {
+  static login(jwt) {
+    localStorage.addtem('jwt', jwt);
+  }
+
   static loggedIn() {
     return !!localStorage.jwt;
   }

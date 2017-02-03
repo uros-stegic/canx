@@ -1,6 +1,6 @@
-import * as types from './actionTypes';
-import authApi from '../api/AuthApi';
-import auth from '../auth/authentication';
+import * as types from './actionTypes'
+import authApi from '../api/AuthApi'
+import auth from '../auth/authentication'
 
 
 export function loginSuccess() {
@@ -10,7 +10,7 @@ export function loginSuccess() {
 export function loginUser(credentials) {
   return function(dispatch) {
     return authApi.login(credentials).then(response => {
-      localStorage.setItem('jwt', response.jwt);
+      auth.login(response.jwt);
       dispatch(loginSuccess());
     }).catch(error => {
       throw(error)

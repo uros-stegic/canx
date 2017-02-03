@@ -1,4 +1,0 @@
-------- Header.js ------------
-
-- podizanje navigacije - borderi se sazmu
-

@@ -23,6 +23,11 @@ export default function profileReducer(state = initialState.user, action) {
       newState.user.pass = action.pass
       return newState
     }
+    case types.LOG_OUT: {
+      browserHistory.push(`/`)
+      return Object.assign(state, {user: {},
+                                  logged: false})
+    }
     default:
       return state
   }

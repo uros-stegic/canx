@@ -12,6 +12,7 @@ optionsUsersR = do
 -- Fetching list of users
 getUsersR :: Handler Value
 getUsersR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     users <- runDB $ selectList ([] :: [Filter User]) []
     returnJson users
 

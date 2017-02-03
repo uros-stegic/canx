@@ -16,7 +16,7 @@ export function updateProfile(user) {
 }
 
 export function registerSuccess(user) {
-  return {type: types.UPDATE_PROFILE_SUCCESS, user}
+  return {type: types.REGISTER_SUCCESS, user}
 }
 
 export function register(user) {
