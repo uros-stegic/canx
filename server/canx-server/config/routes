@@ -7,3 +7,6 @@
 
 /api/categories/ CategoriesR GET POST OPTIONS
 /api/categories/#CategoryId CategoryR GET PUT DELETE
+
+/test/#Text TestR GET
+

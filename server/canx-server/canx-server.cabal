@@ -23,6 +23,7 @@ library
                      Handler.Home
                      Handler.User
                      Handler.Category
+                     Handler.Playground
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
