@@ -7,7 +7,8 @@ import Data.List ()
 optionsUsersR :: Handler RepPlain
 optionsUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
-    addHeader "Access-Control-Allow-Methods" "GET, POST, OPTIONS"
+    addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+    addHeader "Access-Control-Allow-Headers" "*"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Fetching list of users
@@ -21,7 +22,8 @@ getUsersR = do
 optionsUserR :: UserId -> Handler RepPlain
 optionsUserR _ = do
     addHeader "Access-Control-Allow-Origin" "*"
-    addHeader "Access-Control-Allow-Methods" "GET, PUT, DELETE, OPTIONS"
+    addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+    addHeader "Access-Control-Allow-Headers" "*"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Creating new user
