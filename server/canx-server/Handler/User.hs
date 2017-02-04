@@ -8,7 +8,7 @@ optionsUsersR :: Handler RepPlain
 optionsUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Fetching list of users
@@ -23,7 +23,7 @@ optionsUserR :: UserId -> Handler RepPlain
 optionsUserR _ = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Creating new user

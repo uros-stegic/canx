@@ -6,10 +6,10 @@ class ProfileApi {
 
   static update(user) {
     const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
-    const request = new Request(`http://localhost:3000/api/user/${user.id}`, {
+    const request = new Request(`http://localhost:3000/api/users/${user.id}`, {
       method: 'PUT',
       headers: headers,
-      body: JSON.stringify({user: user})
+      body: JSON.stringify(user)
     })
 
     return fetch(request).then(response => {

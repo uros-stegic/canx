@@ -10,13 +10,14 @@ export default {
 						 	value: "[]{}().*/\\!@#$%^&_-+=><" }
 						],
 			user : {
-				jwt: '123123',
-				ident : 1,
+				// jwt: '123123',
+				ident : "bezveze",
 				name: 'Pera Peric',
-				email: 'pera@gmail.com',
-				password: '123456',
+				email: 'pera.peric@gmail.com',
+				password: 'asdasd',
 				avatar: '',
-        draw: {}
+				id: "58937ef96e95521e47000000"
+        // draw: {}
 			},
       logged: !!localStorage.jwt,
 }
