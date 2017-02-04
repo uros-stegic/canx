@@ -1,8 +1,8 @@
-import { connect } from 'react-redux' 
-import Letter from '../views/Letter' 
-import { getBeforeLetter, getAfterLetter} from '../utils' 
+import { connect } from 'react-redux'
+import Letter from '../views/Letter'
+import { getBeforeLetter, getAfterLetter} from '../utils'
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps(state, ownProps) {
   return {
 		args: {
 	    letter: ownProps.params.letter,
@@ -17,4 +17,4 @@ const LetterContainer = connect(
   mapStateToProps
 )(Letter)
 
-export default LetterContainer 
+export default LetterContainer

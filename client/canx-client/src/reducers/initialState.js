@@ -11,10 +11,10 @@ export default {
 						],
 			user : {
 				jwt: '123123',
-				id : 1,
+				ident : 1,
 				name: 'Pera Peric',
-				email: 'pera@peric.com',
-				pass: '123456',
+				email: 'pera@gmail.com',
+				password: '123456',
 				avatar: '',
         draw: {}
 			},

@@ -8,25 +8,13 @@ export default function profileReducer(state = initialState.user, action) {
       browserHistory.push(`/home`)
       return Object.assign({}, action.user)
     }
-    case types.UPDATE_NAME_SUCCESS: {
-      const newState = Object.assign({}, state)
-      newState.user.name = action.name
-      return newState
-    }
-    case types.UPDATE_EMAIL_SUCCESS: {
-      const newState = Object.assign({}, state)
-      newState.user.email = action.email
-      return newState
-    }
-    case types.UPDATE_PASS_SUCCESS: {
-      const newState = Object.assign({}, state)
-      newState.user.pass = action.pass
-      return newState
+    case types.UPDATE_PROFILE_SUCCESS: {
+      return Object.assign({}, state, action.user)
     }
     case types.LOG_OUT: {
       browserHistory.push(`/`)
       return Object.assign(state, {user: {},
-                                  logged: false})
+                                   logged: false})
     }
     default:
       return state

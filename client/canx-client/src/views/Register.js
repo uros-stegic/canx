@@ -34,8 +34,8 @@ class Register extends React.Component {
       this.setState({openModal: false})
     }
 
-    createUser(e) {
-        e.preventDefault()
+    createUser(ev) {
+        ev.preventDefault()
         if(testName(this.user.name) && testEmail(this.user.email) && testPass(this.user.password) && testConfirmPass(this.user.password, this.user.confirmPassword))
           this.props.actions.register({ name: this.user.name,
             email: this.user.email,
@@ -57,25 +57,25 @@ class Register extends React.Component {
             ev.target.classList.add('btn-err')
             return
           }
-          break;
+          break
         case "email":
           if(testEmail(ev.target.value) === false){
             ev.target.classList.add('btn-err')
             return
           }
-          break;
+          break
         case "password":
           if(testPass(ev.target.value, document.querySelector("input[name='password']").value) === false){
             ev.target.classList.add('btn-err')
             return
           }
-          break;
+          break
         case "confirmPassword":
           if(testConfirmPass(ev.target.value) === false){
             ev.target.classList.add('btn-err')
             return
           }
-          break;
+          break
       }
       ev.target.classList.remove('btn-err')
       this.user[name] = ev.target.value

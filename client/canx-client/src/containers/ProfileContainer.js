@@ -1,12 +1,20 @@
 import { connect } from 'react-redux'
 import Profile from '../views/Profile'
+import * as profileActions from '../actions/profileActions'
+import {bindActionCreators} from 'redux'
 
 function mapStateToProps(state, ownProps) {
-  return state.user 
+  return {
+      args: state
+  }
 }
 
-const ProfileContainer = connect(
-  mapStateToProps
-)(Profile)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(profileActions, dispatch)
+  };
+}
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
 
 export default ProfileContainer

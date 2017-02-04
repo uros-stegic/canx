@@ -62,8 +62,10 @@ class Letter extends React.Component {
 		this.ctx = this.canvas.getContext('2d')
 		let style = window.getComputedStyle(this.canvas)
 		this.ctx.canvas.width = parseInt(style.getPropertyValue('width'), 10)
-		this.ctx.canvas.height = parseInt(style.getPropertyValue('height'), 10) 
+		this.ctx.canvas.height = parseInt(style.getPropertyValue('height'), 10)
 		this.ctx.lineWidth = 10
+		// this.ctx.shadowBlur = 1;
+		// this.ctx.shadowColor = "#cccccc";
 		this.ctx.lineJoin = 'round'
 		this.ctx.lineCap = 'round'
 		this.ctx.strokeStyle = '#cccccc'

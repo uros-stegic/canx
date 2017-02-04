@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux'
-import profile from './profileReducer'
+import user from './profileReducer'
 import categories from './categoriesReducer'
 import auth from './authReducer'
 import draw from './drawReducer'
 
 const rootReducer = combineReducers({
   // short hand property names
-  profile,
+  user,
   categories,
   auth,
   draw

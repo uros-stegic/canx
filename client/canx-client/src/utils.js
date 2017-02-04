@@ -38,7 +38,6 @@ export function getAfterLetter(categories, props) {
 
 export function getBeforeCategory(categories, category) {
 		let cat = getFilteredCategory(categories, category)
-		console.log(categories)
 		let ind = categories.indexOf(cat)
 
 		if(ind !== -1)
