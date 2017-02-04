@@ -3,10 +3,11 @@ module Handler.User where
 import Import
 import Data.List ()
 
+-- CORS fix for all users
 optionsUsersR :: Handler RepPlain
 optionsUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
-    addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+    addHeader "Access-Control-Allow-Methods" "GET, POST, OPTIONS"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Fetching list of users
@@ -15,6 +16,13 @@ getUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
     users <- runDB $ selectList ([] :: [Filter User]) []
     returnJson users
+
+-- CORS fix for single user
+optionsUserR :: UserId -> Handler RepPlain
+optionsUserR _ = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "GET, PUT, DELETE, OPTIONS"
+    return $ RepPlain $ toContent ("" :: Text)
 
 -- Creating new user
 postUsersR :: Handler Value
@@ -27,12 +35,14 @@ postUsersR = do
 -- Fetching some user
 getUserR :: UserId -> Handler Value
 getUserR id' = do
+    addHeader "Access-Control-Allow-Origin" "*"
     user <- runDB $ selectFirst [UserId ==. id'] []
     returnJson user
 
 -- Changing some user
 putUserR :: UserId -> Handler Value
 putUserR id' = do
+    addHeader "Access-Control-Allow-Origin" "*"
     person <- requireJsonBody :: Handler User
     t <- runDB $ replace id' person
     sendResponseStatus status200 ("UPDATED" :: Text)
@@ -49,5 +59,6 @@ putUserR id' = do
 -- Removing some user
 deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do
+    addHeader "Access-Control-Allow-Origin" "*"
     ok <- runDB $ delete id'
     returnJson ok
