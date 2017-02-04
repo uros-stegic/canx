@@ -90,6 +90,7 @@ library
                  , time
                  , case-insensitive
                  , wai
+                 , cryptohash-sha256
 
 executable         canx-server
     if flag(library-only)
