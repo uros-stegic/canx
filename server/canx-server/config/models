@@ -1,12 +1,14 @@
 User json
     ident Text
-	email Text Maybe
+    email Text Maybe
     password Text Maybe
-	name Text Maybe
-	avatar Text Maybe
+    name Text Maybe
+    avatar Text Maybe
     UniqueUser ident
     deriving Typeable
 
 Category json
     name Text
-    letters [Text]
+    letters [Text] Maybe
+    deriving Typeable Show
+
