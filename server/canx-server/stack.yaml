@@ -4,4 +4,5 @@ packages:
 - '.'
 extra-deps:
 - cryptohash-sha256-0.11.100.1
+- jose-jwt-0.7.4
 resolver: lts-6.26
