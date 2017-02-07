@@ -8,6 +8,5 @@
 /api/categories/ CategoriesR GET POST OPTIONS
 /api/categories/#CategoryId CategoryR GET PUT DELETE
 
-/test/enc/#Text/#Text EncR GET
-/test/dec/#Text/#Text DecR GET
+/test/hash/#Text/#Text HashR GET
 
