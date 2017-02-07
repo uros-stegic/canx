@@ -1,6 +1,7 @@
 module Handler.Playground where
 
 import Import
+import Data.List ()
 import Numeric (showIntAtBase)
 import Data.Char (intToDigit)
 import qualified Data.Text as T
@@ -39,10 +40,8 @@ getEncR key str = do
 
 getDecR :: Text -> Text -> Handler Value
 getDecR key str = do
-    let Just cypher = decrypt key str
-    let res = Category {
-        categoryName = cypher,
-        categoryLetters = Just [key, str]
-    }
-    returnJson res
+    let cypher = decrypt key str
+    case cypher of
+        Nothing -> sendResponseStatus status500 ("Wrong decryption" :: T.Text)
+        Just digest -> returnJson digest
 

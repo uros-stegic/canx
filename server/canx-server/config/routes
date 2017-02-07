@@ -12,3 +12,6 @@
 
 /test/enc/#Text/#Text EncR GET
 /test/dec/#Text/#Text DecR GET
+
+/auth/credentials AuthR POST
+
