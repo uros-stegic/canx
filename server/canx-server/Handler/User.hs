@@ -46,7 +46,7 @@ putUserR :: UserId -> Handler Value
 putUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
     person <- requireJsonBody :: Handler User
-    t <- runDB $ replace id' person
+    _ <- runDB $ replace id' person
     sendResponseStatus status200 ("UPDATED" :: Text)
 
     {-elem <- parseJsonBody requestBody-}
