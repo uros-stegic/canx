@@ -10,3 +10,5 @@
 
 /test/hash/#Text/#Text HashR GET
 
+/test/enc/#Text/#Text EncR GET
+/test/dec/#Text/#Text DecR GET

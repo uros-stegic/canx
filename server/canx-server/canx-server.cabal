@@ -18,6 +18,7 @@ library
                      Import
                      Import.NoFoundation
                      Model
+                     MyAuth
                      Settings
                      Settings.StaticFiles
                      Handler.Home

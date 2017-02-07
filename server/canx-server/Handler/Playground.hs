@@ -28,3 +28,21 @@ getHashR key str = do
     }
     returnJson res
 
+getEncR :: Text -> Text -> Handler Value
+getEncR key str = do
+    let Just cypher = encrypt key str
+    let res = Category {
+        categoryName = cypher,
+        categoryLetters = Just [key, str]
+    }
+    returnJson res
+
+getDecR :: Text -> Text -> Handler Value
+getDecR key str = do
+    let Just cypher = decrypt key str
+    let res = Category {
+        categoryName = cypher,
+        categoryLetters = Just [key, str]
+    }
+    returnJson res
+
