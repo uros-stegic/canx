@@ -2,6 +2,7 @@ module Handler.User where
 
 import Import
 import Data.List ()
+import qualified Data.ByteString as BString
 
 -- CORS fix for all users
 optionsUsersR :: Handler RepPlain
@@ -57,6 +58,16 @@ putUserR id' = do
     {-let user = requestBody { userEmail = Just "nothing" }-}
 --    user <- runDB $ updateGet id' [requestBody]
     {-returnJson t-}
+
+-- Updating User avatar
+putUserAvatarR :: UserId -> Handler Value
+putUserAvatarR id' = do
+    {-user <- runDB $ selectFirst [UserId ==. id'] []-}
+    {-let uid = show user-}
+    -- TODO: Transform id' into a normal id
+    let fpath = "userResources/" ++ show id' ++ ".jpg"
+    status <- writeFile fpath (BString.empty)
+    sendResponseStatus status200 ("TODO" :: Text)
 
 -- Removing some user
 deleteUserR :: UserId -> Handler Value
