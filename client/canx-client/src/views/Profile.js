@@ -2,7 +2,6 @@ import React from 'react'
 import {testName, testEmail, testPass} from '../utils'
 import md5 from 'js-md5'
 
-
 class Profile extends React.Component {
     constructor(...args){
   		super(...args)
@@ -19,7 +18,10 @@ class Profile extends React.Component {
         avatar: this.props.args.user.avatar
       }
       this.change = this.change.bind(this)
+      this.updateField = this.updateField.bind(this)
       this.update = this.update.bind(this)
+      this.uploadPhoto = this.uploadPhoto.bind(this)
+      this.readerLoad = this.readerLoad.bind(this)
 	  }
 
     unsetOpen(opened) {
@@ -32,32 +34,15 @@ class Profile extends React.Component {
 
    change(ev) {
      let name = ev.target.name
+     if(!this.testField(name, ev.target.value))
+        ev.target.classList.add('btn-err')
+     else
+        ev.target.classList.remove('btn-err')
 
-     switch (name) {
-       case "name":
-         if(testName(name) === false){
-           ev.target.classList.add('btn-err')
-           return
-         }
-         break
-       case "email":
-         if(testEmail(ev.target.value) === false){
-           ev.target.classList.add('btn-err')
-           return
-         }
-         break
-       case "password":
-         if(testPass(ev.target.value, document.querySelector("input[name='password']").value) === false){
-           ev.target.classList.add('btn-err')
-           return
-         }
-         break
-      }
-
-      ev.target.classList.remove('btn-err')
    }
 
    testField(name, value) {
+     console.log('sasasa')
      switch (name) {
        case "name":
           return testName(value)
@@ -67,25 +52,42 @@ class Profile extends React.Component {
           return testEmail(value)
      }
      return false
-  }
-   update(ev){
+   }
+
+   update() {
+     this.props.actions.updateProfile({name: this.user.name,
+                                       email: this.user.email,
+                                       password: (this.user.password === "") ? this.user.oldPassword : md5(this.user.password),
+                                       avatar: this.user.avatar,
+                                       ident: this.props.args.user.ident,
+                                       id: this.props.args.user.id
+     })
+   }
+
+   updateField(ev){
      ev.preventDefault()
      const name = ev.target.name
      const newValue = document.querySelector(`.form-control[name='${name}']`).value
-     console.log(newValue)
-     console.log("open"+ name.charAt(0).toUpperCase() + name.slice(1))
      if(this.testField(name, newValue)) {
         this.user[name] = newValue
-        this.props.actions.updateProfile({name: this.user.name,
-                                          email: this.user.email,
-                                          password: (this.user.password === "") ? this.user.oldPassword : md5(this.user.password),
-                                          avatar: this.user.avatar,
-                                          ident: this.props.args.user.ident,
-                                          id: this.props.args.user.id
-        })
+        this.update()
         this.unsetOpen("open"+ name.charAt(0).toUpperCase() + name.slice(1))()
       }
-    console.log(this.user)
+   }
+
+   uploadPhoto(ev) {
+  		const reader = new FileReader()
+      reader.onload = this.readerLoad
+      reader.readAsDataURL(ev.target.files[0])
+   }
+
+   readerLoad(ev) {
+     const photoContainer = document.querySelector('.profile-pic-container')
+     photoContainer.style.backgroundImage = 'url('+ev.target.result+')'
+     photoContainer.style.backgroundSize = 'cover'
+     photoContainer.classList.remove('profile-no-pic')
+     this.user.avatar = ev.target.result
+     this.update()
    }
 
    render() {
@@ -95,7 +97,7 @@ class Profile extends React.Component {
 
 			<div className='profile-pic-row'>
 				<div className='profile-pic-container profile-no-pic'>
-					<input type='file' className='profile-pic-input'/>
+					<input type='file' className='profile-pic-input' onChange={this.uploadPhoto}/>
 				</div>
 
 				<div className='profile-name-container'>
@@ -104,7 +106,7 @@ class Profile extends React.Component {
 					<div className={(this.state.openName ? "display-none ":"")+"name-text"} > {this.user.name} </div>
 					<div className={(!this.state.openName ? "display-none ":"") + "name-input-container"} >
 						<input type='text' className='form-control' name='name' defaultValue={this.user.name} onChange={this.change}/>
-						<input type='submit' className='btn' name='name' onClick={this.update} value="Save"/>
+						<input type='submit' className='btn' name='name' onClick={this.updateField} value="Save"/>
 					</div>
 				</div>
 
@@ -116,7 +118,7 @@ class Profile extends React.Component {
 				<div className={(this.state.openEmail ? "display-none ":"")+"email-text"}> {this.user.email}</div>
           <div className={(!this.state.openEmail ? "display-none ":"") + "email-input-container"}>
           <input type='email' className='form-control' name='email' defaultValue={this.user.email} onChange={this.change}/>
-					<input type='submit' className='btn' name='email' onClick={this.update} value="Save"/>
+					<input type='submit' className='btn' name='email' onClick={this.updateField} value="Save"/>
 				</div>
 			</div>
 
@@ -126,10 +128,11 @@ class Profile extends React.Component {
 				<div className={(this.state.openPassword ? "display-none ":"")+"pass-text"}> {this.user.password} </div>
 				<div className={(!this.state.openPassword ? "display-none ":"") + "pass-input-container"}>
 					<input type='password' className='form-control' name='password' defaultValue={this.user.password} onChange={this.change} />
-					<input type='submit' className='btn' name='password' onClick={this.update} value="Save"/>
+					<input type='submit' className='btn' name='password' onClick={this.updateField} value="Save"/>
 				</div>
 		  </div>
 
+     <div id='photo-div' style={{display:'block', bottom: '-200px', position: 'relative'}}> PHOTO </div>
 		 </div>
 	  )
   }

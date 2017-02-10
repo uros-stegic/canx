@@ -19,16 +19,16 @@ import Database.Persist
 
 data Credentials = Credentials {
     email :: T.Text,
-    pass :: T.Text
+    password :: T.Text
 }
 
 instance ToJSON Credentials where
-    toJSON (Credentials email pass) = object ["email" .= email, "pass" .= pass]
+    toJSON (Credentials email password) = object ["email" .= email, "password" .= password]
 
 instance FromJSON Credentials where
     parseJSON (Object o) = Credentials
         <$> o .: "email"
-        <*> o .: "pass"
+        <*> o .: "password"
     parseJSON _ = fail "Cannot parse this"
 
 decryptHelper :: Either JwtError Jws -> Maybe T.Text
@@ -51,4 +51,3 @@ encrypt key msg = do
 
 getToken :: Key User -> Maybe T.Text
 getToken user = encrypt (T.pack "canx_secret_key") $ toJsonText user
-

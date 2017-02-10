@@ -25,7 +25,7 @@ import './style/style.css'
 export default (
 			<Route path='/'>
 				<IndexRoute component={IndexPage}/>
-				<Route component={MainLayout}>
+				<Route component={MainLayout} onEnter={requireAuth}>
 					<Route path='/home' component={Home}/>
 					<Route path='/categories'>
 						<IndexRoute component={CategoriesContainer}/>
@@ -33,7 +33,7 @@ export default (
 						<Route path='/categories/:category/letters/:letter' component={LetterContainer} />
 					</Route>
 					<Route path='/profile' component={ProfileContainer}/>
-					<Route path='/help' component={Help} onEnter={requireAuth}/>
+					<Route path='/help' component={Help} />
 				</Route>
 				<Route path='/login' component={Login} />
 				<Route path='/register' component={Register} />
@@ -42,7 +42,6 @@ export default (
 )
 
 function requireAuth(nextState, replace) {
-  console.log(auth.loggedIn());
   if (!auth.loggedIn()) {
     replace({
       pathname: '/login',

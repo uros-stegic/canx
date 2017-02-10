@@ -1,17 +1,19 @@
 import { connect } from 'react-redux'
 import Profile from '../views/Profile'
-import * as profileActions from '../actions/profileActions'
+import * as userActions from '../actions/userActions'
 import {bindActionCreators} from 'redux'
 
 function mapStateToProps(state, ownProps) {
   return {
-      args: state
-  }
+      args : {
+          user: state.user
+       }
+     }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(profileActions, dispatch)
+    actions: bindActionCreators(userActions, dispatch)
   };
 }
 

@@ -15,6 +15,12 @@ let createdStore = createStore(
 
 createdStore.dispatch(loadCategories())
 
+createdStore.subscribe(() => {
+  console.log('STORE')
+  console.log(createdStore.getState())
+});
+
+
 ReactDOM.render(
   <Provider store={createdStore}>
 		<Router history={browserHistory} routes={routes} />

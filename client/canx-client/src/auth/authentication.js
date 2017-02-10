@@ -1,6 +1,6 @@
 class Auth {
   static login(jwt) {
-    localStorage.addtem('jwt', jwt);
+    localStorage.setItem('jwt', jwt);
   }
 
   static loggedIn() {
@@ -9,6 +9,10 @@ class Auth {
 
   static logOut() {
     localStorage.removeItem('jwt');
+  }
+
+  static authHeaders() {
+    return {'AUTHORIZATION': `${localStorage.jwt}`}
   }
 }
 

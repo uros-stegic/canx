@@ -1,10 +1,9 @@
+import auth from '../auth/authentication'
+
 class CategoriesApi {
-  static requestHeaders() {
-    return {}//'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
-  }
 
   static getAllCategories() {
-    const headers = this.requestHeaders();
+    const headers = Object.assign({'Content-Type': 'application/json'}, auth.authHeaders());
     const request = new Request(`http://localhost:3000/api/categories`, {
       method: 'GET',
       headers: headers

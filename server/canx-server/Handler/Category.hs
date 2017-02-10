@@ -6,6 +6,7 @@ import Data.List ()
 optionsCategoriesR :: Handler RepPlain
 optionsCategoriesR = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
     return $ RepPlain $ toContent ("" :: Text)
 
@@ -13,6 +14,7 @@ optionsCategoriesR = do
 getCategoriesR :: Handler Value
 getCategoriesR = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     categories <- runDB $ selectList ([] :: [Filter Category]) []
     returnJson categories
 

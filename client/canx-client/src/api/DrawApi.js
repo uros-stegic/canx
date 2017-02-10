@@ -1,12 +1,10 @@
-class DrawApi {
+import auth from '../auth/authentication'
 
-  static requestHeaders() {
-    return {'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
-  }
+class DrawApi {
 
   // TODO: implement draw process logic
   static postDraw(draw) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders());
+    const headers = Object.assign({'Content-Type': 'application/json'}, auth.authHeaders());
     const request = new Request(`http://localhost:3000/api/user/draw`, {
       method: 'POST',
       headers: headers,

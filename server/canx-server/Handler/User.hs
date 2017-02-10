@@ -8,13 +8,14 @@ optionsUsersR :: Handler RepPlain
 optionsUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "content-type"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Fetching list of users
 getUsersR :: Handler Value
 getUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     users <- runDB $ selectList ([] :: [Filter User]) []
     returnJson users
 
@@ -23,13 +24,14 @@ optionsUserR :: UserId -> Handler RepPlain
 optionsUserR _ = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "content-type"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     return $ RepPlain $ toContent ("" :: Text)
 
 -- Creating new user
 postUsersR :: Handler Value
 postUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     requestBody <- runDB $ requireJsonBody :: Handler User
     user <- runDB $ insertEntity requestBody
     returnJson user
@@ -38,6 +40,7 @@ postUsersR = do
 getUserR :: UserId -> Handler Value
 getUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     user <- runDB $ selectFirst [UserId ==. id'] []
     returnJson user
 
@@ -45,6 +48,7 @@ getUserR id' = do
 putUserR :: UserId -> Handler Value
 putUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     person <- requireJsonBody :: Handler User
     _ <- runDB $ replace id' person
     sendResponseStatus status200 ("UPDATED" :: Text)
@@ -62,5 +66,6 @@ putUserR id' = do
 deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     ok <- runDB $ delete id'
     returnJson ok

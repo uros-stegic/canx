@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import {modalStyle} from '../style/modalStyle'
 import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
-import * as authActions from '../actions/authActions'
+import * as authActions from '../actions/userActions'
 
 class LogoutModal extends React.Component {
   constructor(...args) {

@@ -4,7 +4,7 @@ import {modalStyle} from '../style/modalStyle'
 import {testName, testEmail, testPass, testConfirmPass} from '../utils'
 import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
-import * as registerActions from '../actions/profileActions'
+import * as registerActions from '../actions/userActions'
 import md5 from 'js-md5'
 
 class Register extends React.Component {
@@ -22,6 +22,7 @@ class Register extends React.Component {
       this.openModal = this.openModal.bind(this)
       this.closeModal = this.closeModal.bind(this)
       this.onBlur = this.onBlur.bind(this)
+      this.onChange = this.onChange.bind(this)
       this.createUser = this.createUser.bind(this)
     }
 
@@ -45,40 +46,54 @@ class Register extends React.Component {
           })
 
         this.closeModal()
+    }
 
+    testField(name, value) {
+      const field = document.querySelector(`.form-control[name='${name}']`)
+
+      switch (name) {
+        case "name":
+          if(testName(value) === false){
+            field.classList.add('btn-err')
+            return false
+          }
+          break
+        case "email":
+          if(testEmail(value) === false){
+            field.classList.add('btn-err')
+            return false
+          }
+          break
+        case "password":
+          if(testPass(value) === false){
+            field.classList.add('btn-err')
+            return false
+          }
+          break
+        case "confirmPassword":
+          if(testConfirmPass(value, this.user.password) === false){
+            field.classList.add('btn-err')
+            return false
+          }
+          break
+      }
+
+      field.classList.remove('btn-err')
+      return true
+    }
+
+    onChange(ev) {
+      return this.testField(ev.target.name, ev.target.value)
     }
 
     onBlur(ev) {
       let name = ev.target.name
+      let value = ev.target.value
 
-      switch (name) {
-        case "name":
-          if(testName(name) === false){
-            ev.target.classList.add('btn-err')
-            return
-          }
-          break
-        case "email":
-          if(testEmail(ev.target.value) === false){
-            ev.target.classList.add('btn-err')
-            return
-          }
-          break
-        case "password":
-          if(testPass(ev.target.value, document.querySelector("input[name='password']").value) === false){
-            ev.target.classList.add('btn-err')
-            return
-          }
-          break
-        case "confirmPassword":
-          if(testConfirmPass(ev.target.value) === false){
-            ev.target.classList.add('btn-err')
-            return
-          }
-          break
-      }
-      ev.target.classList.remove('btn-err')
-      this.user[name] = ev.target.value
+      if(!this.testField(name,value))
+        return false
+
+      this.user[name] = value
     }
 
    render() {
@@ -88,21 +103,41 @@ class Register extends React.Component {
     			<form>
     				<div className='form-group sign-group'>
     						<label> Name and surname: </label>
-    						<input type='text' name='name' onBlur={this.onBlur} className='form-control'/>
+    						<input type='text'
+                       name='name'
+                       onBlur={this.onBlur}
+                       onChange={this.onChange}
+                       className='form-control'
+                       autoFocus />
     				</div>
     				<div className='form-group sign-group'>
     						<label> Email: </label>
-    						<input type='email' name='email' onBlur={this.onBlur} className='form-control'/>
+    						<input type='email'
+                       name='email'
+                       onBlur={this.onBlur}
+                       onChange={this.onChange}
+                       className='form-control'/>
     				</div>
     				<div className='form-group sign-group'>
     						<label> Password: </label>
-    						<input type='password' name='password' onBlur={this.onBlur} className='form-control'/>
+    						<input type='password'
+                       name='password'
+                       onBlur={this.onBlur}
+                       onChange={this.onChange}
+                       className='form-control'/>
     				</div>
     				<div className='form-group sign-group'>
     						<label> Confirm password: </label>
-    						<input type='password' name='confirmPassword' onBlur={this.onBlur} className='form-control'/>
+    						<input type='password'
+                       name='confirmPassword'
+                       onBlur={this.onBlur}
+                       onChange={this.onChange}
+                       className='form-control'/>
     				</div>
-    				<input type='submit' onClick={this.openModal} className='btn form-group login-btn sign-group' value='REGISTER' />
+    				<input type='submit'
+                   onClick={this.openModal}
+                   className='btn form-group login-btn sign-group'
+                   value='REGISTER' />
     			</form>
 
           <Modal isOpen={this.state.openModal}
