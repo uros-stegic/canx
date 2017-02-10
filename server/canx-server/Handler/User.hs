@@ -33,6 +33,7 @@ postUsersR :: Handler Value
 postUsersR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Expose-Headers" "authorization"
     requestBody <- runDB $ requireJsonBody :: Handler User
     user <- runDB $ insertEntity requestBody
     case user of
