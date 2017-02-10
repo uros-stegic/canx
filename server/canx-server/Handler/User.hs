@@ -35,7 +35,11 @@ postUsersR = do
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     requestBody <- runDB $ requireJsonBody :: Handler User
     user <- runDB $ insertEntity requestBody
-    returnJson user
+    case user of
+        Entity userID userData -> do
+            let Just token = getToken userID
+            addHeader "Authorization" token
+            returnJson $ Entity userID userData
 
 -- Fetching some user
 getUserR :: UserId -> Handler Value
