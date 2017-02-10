@@ -17,12 +17,19 @@ class Profile extends React.Component {
         oldPassword: this.props.args.user.password,
         avatar: this.props.args.user.avatar
       }
+
       this.change = this.change.bind(this)
       this.updateField = this.updateField.bind(this)
       this.update = this.update.bind(this)
       this.uploadPhoto = this.uploadPhoto.bind(this)
       this.readerLoad = this.readerLoad.bind(this)
+      this.loadPhoto = this.loadPhoto.bind(this)
+      this.updatePhoto = this.updatePhoto.bind(this)
 	  }
+
+    componentDidMount() {
+      this.loadPhoto()
+    }
 
     unsetOpen(opened) {
 		  return () => this.setState({[opened] : false})
@@ -42,7 +49,6 @@ class Profile extends React.Component {
    }
 
    testField(name, value) {
-     console.log('sasasa')
      switch (name) {
        case "name":
           return testName(value)
@@ -50,8 +56,9 @@ class Profile extends React.Component {
           return testPass(value)
        case "email":
           return testEmail(value)
+       default:
+          return false
      }
-     return false
    }
 
    update() {
@@ -81,13 +88,31 @@ class Profile extends React.Component {
       reader.readAsDataURL(ev.target.files[0])
    }
 
+   loadPhoto(){
+       if(this.user.avatar !==  '') {
+         const photoContainer = document.querySelector('.profile-pic-container')
+         photoContainer.style.backgroundImage = 'url('+this.user.avatar+')'
+         photoContainer.style.backgroundSize = 'cover'
+         photoContainer.classList.remove('profile-no-pic')
+       }
+   }
+
    readerLoad(ev) {
-     const photoContainer = document.querySelector('.profile-pic-container')
-     photoContainer.style.backgroundImage = 'url('+ev.target.result+')'
-     photoContainer.style.backgroundSize = 'cover'
-     photoContainer.classList.remove('profile-no-pic')
      this.user.avatar = ev.target.result
-     this.update()
+     this.loadPhoto()
+
+// TODO: put this call somewhere else
+      this.updatePhoto()
+   }
+
+   updatePhoto() {
+       this.props.actions.updatePhoto({name: this.user.name,
+                                         email: this.user.email,
+                                         password: (this.user.password === "") ? this.user.oldPassword : md5(this.user.password),
+                                         avatar: this.user.avatar,
+                                         ident: this.props.args.user.ident,
+                                         id: this.props.args.user.id
+       })
    }
 
    render() {
@@ -131,9 +156,7 @@ class Profile extends React.Component {
 					<input type='submit' className='btn' name='password' onClick={this.updateField} value="Save"/>
 				</div>
 		  </div>
-
-     <div id='photo-div' style={{display:'block', bottom: '-200px', position: 'relative'}}> PHOTO </div>
-		 </div>
+    </div>
 	  )
   }
 }

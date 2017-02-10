@@ -76,6 +76,8 @@ class Register extends React.Component {
             return false
           }
           break
+       default:
+          return false
       }
 
       field.classList.remove('btn-err')

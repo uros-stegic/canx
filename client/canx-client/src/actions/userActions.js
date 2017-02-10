@@ -8,8 +8,9 @@ export function registerSuccess(user) {
 
 export function register(user) {
   return function (dispatch) {
-    return UserApi.register(user).then(user => {
-      dispatch(registerSuccess(user));
+    return UserApi.register(user).then(response => {
+      auth.login(response.user, response.jwt)
+      dispatch(registerSuccess(response.user))
     }).catch(error => {
       throw(error)
     })
@@ -23,8 +24,8 @@ export function loginSuccess(credentials) {
 export function loginUser(credentials) {
   return function(dispatch) {
     return UserApi.login(credentials).then(response => {
-      auth.login(response.jwt)
-      dispatch(loginSuccess(response))
+      auth.login(response.user, response.jwt)
+      dispatch(loginSuccess(response.user))
     }).catch(error => {
       throw(error)
     })
@@ -48,8 +49,37 @@ export function updateProfileSuccess(user) {
 
 export function updateProfile(user) {
   return function (dispatch) {
-    return UserApi.update(user).then(user => {
-      dispatch(updateProfileSuccess(user));
+    return UserApi.update(user).then(res => {
+        dispatch(updateProfileSuccess(user))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function updatePhotoSuccess(user) {
+  return {type: types.UPDATE_PHOTO_SUCCESS, user}
+}
+
+export function updatePhoto(user) {
+  return function (dispatch) {
+    return UserApi.updatePhoto(user).then(res => {
+        dispatch(updatePhotoSuccess(user))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function storeRememberedUserSuccess(user) {
+  return {type: types.STORE_REMEMBERED_USER, user}
+}
+
+export function storeRememberedUser(user) {
+  return function (dispatch) {
+    let promisse = new Promise((resolve, reject) => resolve(user) )
+    return promisse.then((user) => {
+      dispatch(storeRememberedUserSuccess(user))
     }).catch(error => {
       throw(error)
     })
