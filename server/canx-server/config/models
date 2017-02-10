@@ -18,3 +18,8 @@ Drawing json
     category Text
     content Text
     deriving Show
+
+Avatar json
+    content Text
+    format Text
+    deriving Show
