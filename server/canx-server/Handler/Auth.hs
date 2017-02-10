@@ -27,4 +27,4 @@ postAuthR = do
         Just( Entity userID userData) -> do
             let Just token = getToken userID
             addHeader "Authorization" token
-            returnJson userData
+            returnJson $ Entity userID userData

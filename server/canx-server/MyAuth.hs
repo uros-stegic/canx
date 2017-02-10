@@ -51,3 +51,4 @@ encrypt key msg = do
 
 getToken :: Key User -> Maybe T.Text
 getToken user = encrypt (T.pack "canx_secret_key") $ toJsonText user
+
