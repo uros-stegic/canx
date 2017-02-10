@@ -78,6 +78,17 @@ putUserAvatarR id' = do
     status <- writeFile fpath (BString.empty)
     sendResponseStatus status200 ("TODO" :: Text)
 
+-- Writing user drawing to database.
+postUserDrawingR :: UserId -> Handler Value
+postUserDrawingR id' = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Expose-Headers" "authorization"
+    requestBody <- runDB requireJsonBody :: Handler Drawing
+    _ <- runDB $ insertEntity requestBody
+    sendResponseStatus status200 ("Drawing inserted" :: Text)
+
+
 -- Removing some user
 deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do

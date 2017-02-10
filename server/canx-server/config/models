@@ -12,3 +12,9 @@ Category json
     letters [Text] Maybe
     deriving Typeable Show
 
+Drawing json
+    uid Text
+    letter Text
+    category Text
+    content Text
+    deriving Show
