@@ -64,19 +64,15 @@ instance Yesod App where
             Nothing -> getApprootText guessApproot app req
             Just root -> root
 
-    isAuthorized HomeR _ = return Authorized
-    isAuthorized AuthR _ = return Authorized
-    isAuthorized RegisterR _ = return Authorized
-    isAuthorized _ False = return Authorized
-    isAuthorized _ _     = do
-        auth <- lookupBearerAuth
-        case auth of
-            Nothing -> return AuthenticationRequired
-            Just auth' -> do
-                let token = decrypt "canx_secret_key" auth'
-                case token of
-                    Nothing -> return $ Unauthorized "Invalid token"
-                    Just _ -> return Authorized
+    isAuthorized UsersR           _ = checkAuth
+    isAuthorized (UserR _)        _ = checkAuth
+    isAuthorized (UserAvatarR _)  _ = checkAuth
+    isAuthorized (UserDrawingR _) _ = checkAuth
+    isAuthorized CategoriesR      _ = checkAuth
+    isAuthorized (CategoryR _)    _ = checkAuth
+
+    isAuthorized _ _            = return Authorized
+
 
     -- Store session data on the client in encrypted cookies,
     -- default session idle timeout is 120 minutes
@@ -164,6 +160,17 @@ instance Yesod App where
 
     makeLogger = return . appLogger
 
+
+checkAuth :: (MonadHandler m) => m AuthResult
+checkAuth = do
+    auth <- lookupBearerAuth
+    case auth of
+        Nothing -> return AuthenticationRequired
+        Just auth' -> do
+            let token = decrypt "canx_secret_key" auth'
+            case token of
+                Nothing -> return $ Unauthorized "Invalid token"
+                Just _ -> return Authorized
 
 -- Define breadcrumbs.
 instance YesodBreadcrumbs App where
