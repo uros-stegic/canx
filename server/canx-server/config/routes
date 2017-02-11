@@ -8,7 +8,7 @@
 /api/users/#UserId/drawing UserDrawingR POST
 
 /api/categories/ CategoriesR GET POST OPTIONS
-/api/categories/#CategoryId CategoryR GET PUT DELETE
+/api/categories/#CategoryId CategoryR GET PUT DELETE OPTIONS
 
 /test/hash/#Text/#Text HashR GET
 
