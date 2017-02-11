@@ -53,6 +53,8 @@ class Login extends React.Component {
             return false
           }
           break
+       default:
+          return false
       }
 
       field.classList.remove('btn-err')
@@ -121,7 +123,7 @@ class Login extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userActions, dispatch)
-  };
+  }
 }
 
 export default connect(null, mapDispatchToProps)(Login)

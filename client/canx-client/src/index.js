@@ -6,18 +6,19 @@ import {createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
-import {loadCategories} from './actions/categoriesActions';
+import auth from './auth/authentication'
 
 let createdStore = createStore(
     rootReducer,
     applyMiddleware(thunk)
 )
 
-createdStore.dispatch(loadCategories())
 
 createdStore.subscribe(() => {
   console.log('STORE')
   console.log(createdStore.getState())
+  const state = createdStore.getState()
+  auth.saveUserState(state.user)
 });
 
 
