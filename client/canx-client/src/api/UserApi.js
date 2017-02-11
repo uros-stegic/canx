@@ -3,8 +3,8 @@ import auth from '../auth/authentication'
 class UserApi {
 
   static register(user) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, auth.authHeaders())
-    const request = new Request(`http://localhost:3000/api/users`, {
+    const headers = Object.assign({'Content-Type': 'application/json'})
+    const request = new Request(`http://localhost:3000/auth/registration`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(user)
@@ -48,10 +48,10 @@ class UserApi {
   }
 
   static updatePhoto(user) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, auth.authHeaders())
+    const headers = Object.assign({'Content-Type': 'application/json', 'Accept': 'application/json'}, auth.authHeaders())
     const tokens = user.avatar.match(/data:(.*)\/(.*);base64,(.*)/)
-    const body = { type: tokens[2] ,
-                   data: tokens[3]}
+    const body = { format: tokens[2] ,
+                   content: tokens[3]}
     const request = new Request(`http://localhost:3000/api/users/${user.id}/avatar`, {
       method: 'PUT',
       headers: headers,
@@ -59,7 +59,7 @@ class UserApi {
     })
 
     return fetch(request).then(response => {
-      return response
+      return response.text().then((r) => r)
     }).catch(error => {
       return error
     })

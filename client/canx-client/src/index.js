@@ -19,7 +19,7 @@ createdStore.subscribe(() => {
   console.log(createdStore.getState())
   const state = createdStore.getState()
 
-  if(Object.keys(state.user).length !== 0)
+  if(state.user !== undefined && Object.keys(state.user).length !== 0)
     auth.saveUserState(state.user)
 });
 

@@ -1,7 +1,9 @@
 class Auth {
   static login(user, jwt) {
-    localStorage.setItem('user', JSON.stringify(user))
-    localStorage.setItem('jwt', jwt)
+    if(user !== undefined && jwt !== undefined && jwt.length !== 0 && Object.keys(user).length !== 0) {
+      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('jwt', jwt)
+    }
   }
 
   static loggedIn() {
@@ -9,10 +11,8 @@ class Auth {
   }
 
   static logOut() {
-    console.log(localStorage.user)
     localStorage.removeItem('user')
     localStorage.removeItem('jwt')
-      console.log(localStorage.user)
   }
 
   static authHeaders() {
@@ -24,8 +24,6 @@ class Auth {
   }
 
   static saveUserState(user) {
-    console.log('Stavi user')
-    console.log(user)
     localStorage.setItem('user', JSON.stringify(user))
   }
 }

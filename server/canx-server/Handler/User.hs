@@ -91,9 +91,12 @@ putUserAvatarR user = do
     avatar <- runDB requireJsonBody :: Handler Avatar
     let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
     let fpath = "userResources/" ++ uid ++ ".jpg"
+    -- DEBUG:
+    -- let fpath = uid ++ ".jpg"
+
     {-writeFile "userResources/test.txt" (avatarContent avatar)-}
     status <- writeFile fpath (BSChar8.pack $ TText.unpack $ avatarContent avatar)
-    sendResponseStatus status200 ("TODO" :: Text)
+    sendResponseStatus status200 (TText.pack fpath :: Text)
 
 -- Writing user drawing to database.
 postUserDrawingR :: UserId -> Handler Value
@@ -110,7 +113,7 @@ postUserDrawingR id' = do
 deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
-    addHeader "Access-Control-Allow-Headers" "content-type, authorization" 
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Expose-Headers" "authorization"
     ok <- runDB $ delete id'
     returnJson ok

@@ -64,7 +64,7 @@ export function updatePhotoSuccess(user) {
 export function updatePhoto(user) {
   return function (dispatch) {
     return UserApi.updatePhoto(user).then(res => {
-        dispatch(updatePhotoSuccess(user))
+        dispatch(updatePhotoSuccess(Object.assign(user, {avatar: "/" + res})))
     }).catch(error => {
       throw(error)
     })
