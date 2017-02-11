@@ -13,7 +13,7 @@ export default function userReducer(state = {}, action) {
     }
     case types.LOG_OUT_SUCCESS: {
       browserHistory.push('/')
-      return Object.assign({}, state, {user: {}})
+      return {}
     }
     case types.UPDATE_PROFILE_SUCCESS: {
       return action.user

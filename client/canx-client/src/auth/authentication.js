@@ -9,12 +9,14 @@ class Auth {
   }
 
   static logOut() {
+    console.log(localStorage.user)
     localStorage.removeItem('user')
     localStorage.removeItem('jwt')
+      console.log(localStorage.user)
   }
 
   static authHeaders() {
-    return {'AUTHORIZATION': `${localStorage.jwt}`}
+    return {'AUTHORIZATION': `Bearer ${localStorage.jwt}`}
   }
 
   static getRememberedUser() {
@@ -22,6 +24,8 @@ class Auth {
   }
 
   static saveUserState(user) {
+    console.log('Stavi user')
+    console.log(user)
     localStorage.setItem('user', JSON.stringify(user))
   }
 }

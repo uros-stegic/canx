@@ -18,7 +18,9 @@ createdStore.subscribe(() => {
   console.log('STORE')
   console.log(createdStore.getState())
   const state = createdStore.getState()
-  auth.saveUserState(state.user)
+
+  if(Object.keys(state.user).length !== 0)
+    auth.saveUserState(state.user)
 });
 
 
