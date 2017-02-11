@@ -3,6 +3,9 @@ module Handler.User where
 import Import
 import Data.List ()
 import qualified Data.ByteString as BString
+import qualified Data.Text as TText
+import qualified Data.ByteString.Char8 as BSChar8
+import qualified Data.Char as DChar
 
 -- CORS fix for all users
 optionsUsersR :: Handler RepPlain
@@ -69,13 +72,14 @@ putUserR id' = do
     {-returnJson t-}
 
 -- Updating User avatar
-putUserAvatarR :: UserId -> Handler Value
-putUserAvatarR id' = do
-    {-user <- runDB $ selectFirst [UserId ==. id'] []-}
-    {-let uid = show user-}
-    -- TODO: Transform id' into a normal id
-    let fpath = "userResources/" ++ show id' ++ ".jpg"
-    status <- writeFile fpath (BString.empty)
+-- TODO: Convert base64 to something nice and write to file
+putUserAvatarR :: Key User -> Handler Value
+putUserAvatarR user = do
+    avatar <- runDB requireJsonBody :: Handler Avatar
+    let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
+    let fpath = "userResources/" ++ uid ++ ".jpg"
+    {-writeFile "userResources/test.txt" (avatarContent avatar)-}
+    status <- writeFile fpath (BSChar8.pack $ TText.unpack $ avatarContent avatar)
     sendResponseStatus status200 ("TODO" :: Text)
 
 -- Writing user drawing to database.
