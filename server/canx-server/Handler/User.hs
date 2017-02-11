@@ -50,6 +50,7 @@ getUserR :: UserId -> Handler Value
 getUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Expose-Headers" "authorization"
     user <- runDB $ selectFirst [UserId ==. id'] []
     returnJson user
 
@@ -58,6 +59,7 @@ putUserR :: UserId -> Handler Value
 putUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Expose-Headers" "authorization"
     person <- requireJsonBody :: Handler User
     _ <- runDB $ replace id' person
     sendResponseStatus status200 ("UPDATED" :: Text)
@@ -71,10 +73,21 @@ putUserR id' = do
 --    user <- runDB $ updateGet id' [requestBody]
     {-returnJson t-}
 
+-- CORS fix for avatar update
+optionsUserAvatarR :: UserId -> Handler RepPlain
+optionsUserAvatarR _ = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    return $ RepPlain $ toContent ("" :: Text)
+
 -- Updating User avatar
 -- TODO: Convert base64 to something nice and write to file
 putUserAvatarR :: Key User -> Handler Value
 putUserAvatarR user = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Expose-Headers" "authorization"
     avatar <- runDB requireJsonBody :: Handler Avatar
     let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
     let fpath = "userResources/" ++ uid ++ ".jpg"
@@ -97,6 +110,7 @@ postUserDrawingR id' = do
 deleteUserR :: UserId -> Handler Value
 deleteUserR id' = do
     addHeader "Access-Control-Allow-Origin" "*"
-    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+    addHeader "Access-Control-Allow-Headers" "content-type, authorization" 
+    addHeader "Access-Control-Expose-Headers" "authorization"
     ok <- runDB $ delete id'
     returnJson ok
