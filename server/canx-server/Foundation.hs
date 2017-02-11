@@ -64,6 +64,18 @@ instance Yesod App where
             Nothing -> getApprootText guessApproot app req
             Just root -> root
 
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized AuthR _ = return Authorized
+    isAuthorized _ _     = do
+        auth <- lookupBearerAuth
+        case auth of
+            Nothing -> return AuthenticationRequired
+            Just auth' -> do
+                let token = decrypt "canx_secret_key" auth'
+                case token of
+                    Nothing -> return $ Unauthorized "Invalid token"
+                    Just _ -> return Authorized
+
     -- Store session data on the client in encrypted cookies,
     -- default session idle timeout is 120 minutes
     makeSessionBackend _ = Just <$> defaultClientSessionBackend
@@ -170,7 +182,7 @@ instance YesodAuth App where
     type AuthId App = UserId
 
     -- Where to send a user after successful login
-    loginDest _ = HomeR
+    loginDest _ = AuthR
     -- Where to send a user after logout
     logoutDest _ = HomeR
     -- Override the above two destinations when a Referer: header is present
