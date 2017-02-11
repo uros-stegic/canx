@@ -16,6 +16,7 @@ postAuthR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
     addHeader "Access-Control-Allow-Headers" "content-type"
+    addHeader "Access-Control-Expose-Headers" "Authorization"
     requestBody <- requireJsonBody :: Handler Credentials
     let credEmail = Just $ email requestBody
     let credPass = Just $ password requestBody
@@ -38,7 +39,8 @@ postRegisterR :: Handler Value
 postRegisterR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "content-type"
+    addHeader "Access-Control-Allow-Headers" "Content-Type"
+    addHeader "Access-Control-Expose-Headers" "Authorization"
     requestBody <- runDB $ requireJsonBody :: Handler User
     user <- runDB $ insertEntity requestBody
     case user of
