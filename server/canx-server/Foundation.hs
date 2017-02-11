@@ -66,6 +66,7 @@ instance Yesod App where
 
     isAuthorized HomeR _ = return Authorized
     isAuthorized AuthR _ = return Authorized
+    isAuthorized RegisterR _ = return Authorized
     isAuthorized _ False = return Authorized
     isAuthorized _ _     = do
         auth <- lookupBearerAuth

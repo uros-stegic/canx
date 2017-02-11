@@ -7,8 +7,7 @@ optionsAuthR :: Handler RepPlain
 optionsAuthR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
-    addHeader "Access-Control-Expose-Headers" "authorization"
+    addHeader "Access-Control-Allow-Headers" "content-type"
     return $ RepPlain $ toContent ("" :: Text)
 
 
@@ -16,8 +15,7 @@ postAuthR :: Handler Value
 postAuthR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "content-type, authorization"
-    addHeader "Access-Control-Expose-Headers" "authorization"
+    addHeader "Access-Control-Allow-Headers" "content-type"
     requestBody <- requireJsonBody :: Handler Credentials
     let credEmail = Just $ email requestBody
     let credPass = Just $ password requestBody
@@ -28,3 +26,24 @@ postAuthR = do
             let Just token = getToken userID
             addHeader "Authorization" token
             returnJson $ Entity userID userData
+
+optionsRegisterR :: Handler RepPlain
+optionsRegisterR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
+    addHeader "Access-Control-Allow-Headers" "content-type"
+    return $ RepPlain $ toContent ("" :: Text)
+
+postRegisterR :: Handler Value
+postRegisterR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "POST, OPTIONS"
+    addHeader "Access-Control-Allow-Headers" "content-type"
+    requestBody <- runDB $ requireJsonBody :: Handler User
+    user <- runDB $ insertEntity requestBody
+    case user of
+        Entity userID userData -> do
+            let Just token = getToken userID
+            addHeader "Authorization" token
+            returnJson $ Entity userID userData
+

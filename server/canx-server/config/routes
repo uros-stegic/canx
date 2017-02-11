@@ -16,3 +16,5 @@
 /test/dec/#Text/#Text DecR GET
 
 /auth/credentials AuthR POST OPTIONS
+/auth/registration RegisterR POST OPTIONS
+
