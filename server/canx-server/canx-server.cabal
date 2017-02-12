@@ -95,6 +95,7 @@ library
                  , wai
                  , cryptohash-sha256
                  , jose-jwt
+                 , base64-bytestring
 
 executable         canx-server
     if flag(library-only)

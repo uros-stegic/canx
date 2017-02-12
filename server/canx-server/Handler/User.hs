@@ -2,10 +2,20 @@ module Handler.User where
 
 import Import
 import Data.List ()
-import qualified Data.ByteString as BString
+
+--import Data.ByteString (ByteString)
+--import qualified Data.ByteString as BString
+--import qualified Data.Text.Encoding as DTextEnc
 import qualified Data.Text as TText
-import qualified Data.ByteString.Char8 as BSChar8
-import qualified Data.Char as DChar
+--import qualified Data.ByteString.Char8 as BSChar8
+--import qualified Data.Char as DChar
+
+import qualified Data.ByteString as BS
+import Data.ByteString (ByteString)
+import qualified Data.ByteString.Base64 as BS
+import qualified Data.Text.Encoding as T
+
+import qualified Data.ByteString.Base64 as BS
 
 -- CORS fix for all users
 optionsUsersR :: Handler RepPlain
@@ -89,14 +99,23 @@ putUserAvatarR user = do
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Expose-Headers" "authorization"
     avatar <- runDB requireJsonBody :: Handler Avatar
-    let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
-    let fpath = "userResources/" ++ uid ++ ".jpg"
-    -- DEBUG:
-    -- let fpath = uid ++ ".jpg"
 
-    {-writeFile "userResources/test.txt" (avatarContent avatar)-}
-    status <- writeFile fpath (BSChar8.pack $ TText.unpack $ avatarContent avatar)
-    sendResponseStatus status200 (TText.pack fpath :: Text)
+    let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
+        fformat = TText.unpack $ avatarFormat avatar
+        fpath = "userResources/" ++ uid ++ "." ++ fformat
+        fileData' = BS.decode (T.encodeUtf8 $ avatarContent avatar)
+
+    _ <- runDB $ update user [UserAvatar =. Just (TText.pack ("/" ++fpath))]
+    updatedUser <- runDB $ selectFirst [UserId ==. user] []
+
+    case fileData' of
+         Left err -> do
+             error err
+             sendResponseStatus status200 ("Error" :: Text)
+
+         Right dat -> do
+             liftIO $ BS.writeFile fpath dat
+             returnJson updatedUser
 
 -- Writing user drawing to database.
 postUserDrawingR :: UserId -> Handler Value
