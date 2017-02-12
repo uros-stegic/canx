@@ -2,20 +2,13 @@ module Handler.User where
 
 import Import
 import Data.List ()
+--import System.Random
+--import System.IO.Unsafe
 
---import Data.ByteString (ByteString)
---import qualified Data.ByteString as BString
---import qualified Data.Text.Encoding as DTextEnc
 import qualified Data.Text as TText
---import qualified Data.ByteString.Char8 as BSChar8
---import qualified Data.Char as DChar
-
 import qualified Data.ByteString as BS
-import Data.ByteString (ByteString)
 import qualified Data.ByteString.Base64 as BS
 import qualified Data.Text.Encoding as T
-
-import qualified Data.ByteString.Base64 as BS
 
 -- CORS fix for all users
 optionsUsersR :: Handler RepPlain
@@ -99,9 +92,11 @@ putUserAvatarR user = do
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Expose-Headers" "authorization"
     avatar <- runDB requireJsonBody :: Handler Avatar
-
+    
     let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
         fformat = TText.unpack $ avatarFormat avatar
+    --    version = unsafePerformIO $ randomRIO (1 :: Int, 1000000 :: Int)
+    --    fpath = "static/userResources/" ++ uid ++ "." ++ fformat ++ "?v=" ++ (show version)
         fpath = "static/userResources/" ++ uid ++ "." ++ fformat
         fileData' = BS.decode (T.encodeUtf8 $ avatarContent avatar)
 
@@ -110,8 +105,7 @@ putUserAvatarR user = do
 
     case fileData' of
          Left err -> do
-             error err
-             sendResponseStatus status200 ("Error" :: Text)
+             sendResponseStatus status500 (TText.pack err :: Text)
 
          Right dat -> do
              liftIO $ BS.writeFile fpath dat
@@ -119,13 +113,13 @@ putUserAvatarR user = do
 
 -- Writing user drawing to database.
 postUserDrawingR :: UserId -> Handler Value
-postUserDrawingR id' = do
+postUserDrawingR _ = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Expose-Headers" "authorization"
     requestBody <- runDB requireJsonBody :: Handler Drawing
     _ <- runDB $ insertEntity requestBody
-    sendResponseStatus status200 ("Drawing inserted" :: Text)
+    sendResponseStatus status201 ("Drawing inserted" :: Text)
 
 
 -- Removing some user
