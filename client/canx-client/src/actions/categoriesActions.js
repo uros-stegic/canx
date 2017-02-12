@@ -1,5 +1,5 @@
-import * as types from './actionTypes';
-import categoriesApi from '../api/CategoriesApi';
+import * as types from './actionTypes'
+import categoriesApi from '../api/CategoriesApi'
 
 export function loadCategoriesSuccess(categories) {
   return {type: types.LOAD_CATEGORIES_SUCCESS, categories}

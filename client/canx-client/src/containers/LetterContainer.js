@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import Letter from '../views/Letter'
-import { getBeforeLetter, getAfterLetter} from '../utils'
+import utils from '../utils/utils'
 
 function mapStateToProps(state, ownProps) {
   return {
 		args: {
 	    letter: ownProps.params.letter,
-			before: getBeforeLetter(state.categories, ownProps.params),
-			after: getAfterLetter(state.categories, ownProps.params),
+			before: utils.getBeforeLetter(state.categories, ownProps.params),
+			after: utils.getAfterLetter(state.categories, ownProps.params),
 			title: ownProps.params.category
 		}
   }

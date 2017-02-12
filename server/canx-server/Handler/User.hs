@@ -102,7 +102,7 @@ putUserAvatarR user = do
 
     let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
         fformat = TText.unpack $ avatarFormat avatar
-        fpath = "userResources/" ++ uid ++ "." ++ fformat
+        fpath = "static/userResources/" ++ uid ++ "." ++ fformat
         fileData' = BS.decode (T.encodeUtf8 $ avatarContent avatar)
 
     _ <- runDB $ update user [UserAvatar =. Just (TText.pack ("/" ++fpath))]

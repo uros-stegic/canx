@@ -64,6 +64,7 @@ instance Yesod App where
             Nothing -> getApprootText guessApproot app req
             Just root -> root
 
+    isAuthorized _ False            = return Authorized 
     isAuthorized UsersR           _ = checkAuth
     isAuthorized (UserR _)        _ = checkAuth
     isAuthorized (UserAvatarR _)  _ = checkAuth

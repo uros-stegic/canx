@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import {modalStyle} from '../style/modalStyle'
-import {testName, testEmail, testPass, testConfirmPass} from '../utils'
+import utils from '../utils/utils'
 import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
 import * as registerActions from '../actions/userActions'
@@ -37,7 +37,7 @@ class Register extends React.Component {
 
     createUser(ev) {
         ev.preventDefault()
-        if(testName(this.user.name) && testEmail(this.user.email) && testPass(this.user.password) && testConfirmPass(this.user.password, this.user.confirmPassword))
+        if(utils.testName(this.user.name) && utils.testEmail(this.user.email) && utils.testPass(this.user.password) && utils.testConfirmPass(this.user.password, this.user.confirmPassword))
           this.props.actions.register({ name: this.user.name,
             email: this.user.email,
             password: md5(this.user.password),
@@ -53,25 +53,25 @@ class Register extends React.Component {
 
       switch (name) {
         case "name":
-          if(testName(value) === false){
+          if(utils.testName(value) === false){
             field.classList.add('btn-err')
             return false
           }
           break
         case "email":
-          if(testEmail(value) === false){
+          if(utils.testEmail(value) === false){
             field.classList.add('btn-err')
             return false
           }
           break
         case "password":
-          if(testPass(value) === false){
+          if(utils.testPass(value) === false){
             field.classList.add('btn-err')
             return false
           }
           break
         case "confirmPassword":
-          if(testConfirmPass(value, this.user.password) === false){
+          if(utils.testConfirmPass(value, this.user.password) === false){
             field.classList.add('btn-err')
             return false
           }

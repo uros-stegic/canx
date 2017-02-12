@@ -17,7 +17,7 @@ import Help from './views/Help'
 import NotFound from './views/NotFound'
 
 // Auth
-import auth from './auth/authentication';
+import auth from './auth/authentication'
 
 // Style
 import './style/style.css'
@@ -37,6 +37,8 @@ export default (
 				</Route>
 				<Route path='/login' component={Login} onEnter={requireNotAuth}/>
 				<Route path='/register' component={Register} onEnter={requireNotAuth}/>
+				<Route path='/userResources/*' />
+
 				<Route path='*' component={NotFound} />
 			</Route>
 )

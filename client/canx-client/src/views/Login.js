@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux'
 import { connect } from 'react-redux'
 import md5 from 'js-md5'
 import * as userActions from '../actions/userActions'
-import {testEmail, testPass} from '../utils'
+import utils from '../utils/utils'
 
 class Login extends React.Component {
     constructor(...args) {
@@ -42,13 +42,13 @@ class Login extends React.Component {
 
       switch (name) {
         case "email":
-          if(testEmail(value) === false){
+          if(utils.testEmail(value) === false){
             field.classList.add('btn-err')
             return false
           }
           break
         case "password":
-          if(testPass(value) === false){
+          if(utils.testPass(value) === false){
             field.classList.add('btn-err')
             return false
           }
@@ -77,7 +77,7 @@ class Login extends React.Component {
 
     login(ev) {
         ev.preventDefault()
-        if(testEmail(this.credentials.email) && testPass(this.credentials.password))
+        if(utils.testEmail(this.credentials.email) && utils.testPass(this.credentials.password))
           this.props.actions.loginUser({ email: this.credentials.email,
                                          password: md5(this.credentials.password)
                                        })

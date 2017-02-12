@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import Category from '../views/Category'
-import { getFilteredCategory, getBeforeCategory, getAfterCategory} from '../utils'
+import utils from '../utils/utils'
 
 function mapStateToProps(state, ownProps) {
   return {
 		args: {
-	    category: getFilteredCategory(state.categories, ownProps.params.category),
-			before: getBeforeCategory(state.categories, ownProps.params.category),
-			after: getAfterCategory(state.categories, ownProps.params.category)
+	    category: utils.getFilteredCategory(state.categories, ownProps.params.category),
+			before: utils.getBeforeCategory(state.categories, ownProps.params.category),
+			after: utils.getAfterCategory(state.categories, ownProps.params.category)
 		}
   }
 }

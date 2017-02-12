@@ -1,5 +1,5 @@
 import React from 'react'
-import {testName, testEmail, testPass} from '../utils'
+import utils from '../utils/utils'
 import md5 from 'js-md5'
 
 class Profile extends React.Component {
@@ -51,11 +51,11 @@ class Profile extends React.Component {
    testField(name, value) {
      switch (name) {
        case "name":
-          return testName(value)
+          return utils.testName(value)
        case "password":
-          return testPass(value)
+          return utils.testPass(value)
        case "email":
-          return testEmail(value)
+          return utils.testEmail(value)
        default:
           return false
      }

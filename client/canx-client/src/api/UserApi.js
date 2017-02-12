@@ -1,9 +1,10 @@
 import auth from '../auth/authentication'
+import utils from '../utils/utils'
 
 class UserApi {
 
   static register(user) {
-    const headers = Object.assign({'Content-Type': 'application/json'})
+    const headers = utils.getTypeHeaders()
     const request = new Request(`http://localhost:3000/auth/registration`, {
       method: 'POST',
       headers: headers,
@@ -17,7 +18,7 @@ class UserApi {
   }
 
   static login(credentials) {
-    const headers = Object.assign({'Content-Type': 'application/json'})// auth.authHeaders());
+    const headers = utils.getTypeHeaders()
     const request = new Request(`http://localhost:3000/auth/credentials`, {
       method: 'POST',
       headers: headers,
@@ -33,7 +34,7 @@ class UserApi {
   }
 
   static update(user) {
-    const headers = Object.assign({'Content-Type': 'application/json'}, auth.authHeaders())
+    const headers = Object.assign(utils.getTypeHeaders(), auth.authHeaders())
     const request = new Request(`http://localhost:3000/api/users/${user.id}`, {
       method: 'PUT',
       headers: headers,
@@ -48,7 +49,7 @@ class UserApi {
   }
 
   static updatePhoto(user) {
-    const headers = Object.assign({'Content-Type': 'application/json', 'Accept': 'application/json'}, auth.authHeaders())
+    const headers = Object.assign(utils.getTypeHeaders(), auth.authHeaders())
     const tokens = user.avatar.match(/data:(.*)\/(.*);base64,(.*)/)
     const body = { format: tokens[2] ,
                    content: tokens[3]}
@@ -59,7 +60,7 @@ class UserApi {
     })
 
     return fetch(request).then(response => {
-      return response.text().then((r) => r)
+      return response.json().then((r) => r.avatar)
     }).catch(error => {
       return error
     })
