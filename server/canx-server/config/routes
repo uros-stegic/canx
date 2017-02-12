@@ -5,7 +5,7 @@
 /api/users/ UsersR GET POST OPTIONS
 /api/users/#UserId UserR GET PUT DELETE OPTIONS
 /api/users/#UserId/avatar UserAvatarR PUT OPTIONS
-/api/users/#UserId/drawing UserDrawingR POST
+/api/users/#UserId/drawing UserDrawingR POST OPTIONS
 
 /api/categories/ CategoriesR GET POST OPTIONS
 /api/categories/#CategoryId CategoryR GET PUT DELETE OPTIONS
@@ -17,4 +17,3 @@
 
 /auth/credentials AuthR POST OPTIONS
 /auth/registration RegisterR POST OPTIONS
-

@@ -64,7 +64,8 @@ export function updatePhotoSuccess(user) {
 export function updatePhoto(user) {
   return function (dispatch) {
     return UserApi.updatePhoto(user).then(res => {
-        dispatch(updatePhotoSuccess(Object.assign(user, {avatar: "http://localhost:3000" + res})))
+        const avatarPath = "http://localhost:3000" + res + "?v=" + parseInt(Math.random()*100000, 10)
+        dispatch(updatePhotoSuccess(Object.assign(user, {avatar: avatarPath})))
     }).catch(error => {
       throw(error)
     })

@@ -92,7 +92,7 @@ putUserAvatarR user = do
     addHeader "Access-Control-Allow-Headers" "content-type, authorization"
     addHeader "Access-Control-Expose-Headers" "authorization"
     avatar <- runDB requireJsonBody :: Handler Avatar
-    
+
     let uid = TText.unpack $ TText.tail $ TText.init $ toJsonText user
         fformat = TText.unpack $ avatarFormat avatar
     --    version = unsafePerformIO $ randomRIO (1 :: Int, 1000000 :: Int)
@@ -110,6 +110,14 @@ putUserAvatarR user = do
          Right dat -> do
              liftIO $ BS.writeFile fpath dat
              returnJson updatedUser
+
+optionsUserDrawingR :: UserId -> Handler RepPlain
+optionsUserDrawingR _ = do
+   addHeader "Access-Control-Allow-Origin" "*"
+   addHeader "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
+   addHeader "Access-Control-Allow-Headers" "content-type, authorization"
+   return $ RepPlain $ toContent ("" :: Text)
+
 
 -- Writing user drawing to database.
 postUserDrawingR :: UserId -> Handler Value

@@ -2,22 +2,12 @@ import React from 'react'
 import Footer from './Footer'
 import Modal from 'react-modal'
 import {modalStyle} from '../style/modalStyle.js'
+import DrawApi from '../api/DrawApi'
 
 class Letter extends React.Component {
 	constructor(...args) {
 		super(...args)
-		this.ctx = null
-		this.canvas = null
-		this.rect = null
-		this.points = []
-		this.lastPoint = null
-		this.startTime = null
 
-		this.state = {
-			deleteModalIsOpen: false,
-			saveModalIsOpen: false,
-			strokes: [],
-		}
 		this.openDeleteModal = this.openDeleteModal.bind(this)
 		this.openSaveModal = this.openSaveModal.bind(this)
 		this.closeModal = this.closeModal.bind(this)
@@ -32,6 +22,40 @@ class Letter extends React.Component {
 		this.onUp = this.onUp.bind(this)
 		this.onDown = this.onDown.bind(this)
 		this.onMove = this.onMove.bind(this)
+		this.minXFromStrokes = this.minXFromStrokes.bind(this)
+		this.minYFromStrokes = this.minYFromStrokes.bind(this)
+		this.init = this.init.bind(this)
+		this.initState = this.initState.bind(this)
+		this.initCanvasConf = this.initCanvasConf.bind(this)
+		this.initVar = this.initVar.bind(this)
+
+		this.init()
+	}
+
+	init() {
+		this.initState()
+		this.initCanvasConf()
+		this.initVar()
+	}
+
+	initState() {
+		this.state = {
+			deleteModalIsOpen: false,
+			saveModalIsOpen: false,
+			strokes: [],
+		}
+	}
+
+	initCanvasConf() {
+		this.ctx = null
+		this.canvas = null
+		this.rect = null
+	}
+
+	initVar() {
+		this.points = []
+		this.lastPoint = null
+		this.startTime = null
 	}
 
 	openDeleteModal() {
@@ -81,7 +105,8 @@ class Letter extends React.Component {
 	currentPoint(x, y) {
 			return {
 				x: Math.round((x-this.rect.left)/(this.rect.right-this.rect.left)*this.canvas.width),
-				y: Math.round((y-this.rect.top)/(this.rect.bottom-this.rect.top)*this.canvas.height)
+				y: Math.round((y-this.rect.top)/(this.rect.bottom-this.rect.top)*this.canvas.height),
+				time: (new Date()).getTime()
 			}
 	}
 
@@ -154,11 +179,80 @@ class Letter extends React.Component {
 	}
 
 	clearCanvas() {
+
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+		this.initState()
+		this.initVar()
 		this.closeModal()
 	}
 
+	minXPoint(points) {
+		return points.reduce((prevPoint, currPoint) => {
+			 return (prevPoint.x < currPoint.x) ? prevPoint : currPoint
+	 }, points[0])
+	}
+
+	minYPoint(points) {
+		return points.reduce((prevPoint, currPoint) => {
+			 return (prevPoint.y < currPoint.y) ? prevPoint : currPoint
+	 }, points[0])
+	}
+
+	minXFromStrokes(strokes) {
+		const minXStroke= strokes.reduce((prevStroke, currStroke) => {
+			 const minPrevPointX = this.minXPoint(prevStroke.points)
+			 const minCurrPointX = this.minXPoint(currStroke.points)
+
+			return { points : [
+											(minPrevPointX.x < minCurrPointX.x) ? minPrevPointX : minCurrPointX
+			]}
+		}, strokes[0])
+		return minXStroke.points[0].x
+	}
+
+	minYFromStrokes(strokes) {
+		const minYStroke= strokes.reduce((prevStroke, currStroke) => {
+			 const minPrevPointY = this.minYPoint(prevStroke.points)
+			 const minCurrPointY = this.minYPoint(currStroke.points)
+
+			return { points : [
+									(minPrevPointY.y < minCurrPointY.y) ? minPrevPointY : minCurrPointY
+			]}
+		}, strokes[0])
+		return minYStroke.points[0].y
+	}
+
+	transformStrokes() {
+		const maxY = this.canvas.width
+
+		const rotatedStrokes = this.state.strokes.map((stroke) => {
+				const transformedPoints = stroke.points.map((point) => {
+						return Object.assign(point, { y: maxY - point.y})
+				})
+				return Object.assign(stroke, {points: transformedPoints})
+		})
+
+		const minX = this.minXFromStrokes(rotatedStrokes)
+		const minY = this.minYFromStrokes(rotatedStrokes)
+
+		return this.state.strokes.map((stroke) => {
+				const transformedPoints = stroke.points.map((point) => {
+						return Object.assign(point, {x: point.x-minX, y: point.y - minY})
+				})
+				return Object.assign(stroke, {points: transformedPoints})
+		})
+	}
+
 	saveCanvas() {
+		const transformedStrokes = this.transformStrokes()
+		const capitalizedCategory = this.props.args.title.charAt(0).toUpperCase() + this.props.args.title.slice(1)
+		DrawApi.postDraw({letter: this.props.args.letter,
+											category: capitalizedCategory,
+											content: JSON.stringify(transformedStrokes),
+											uid: this.props.args.id
+										})
+
+		this.clearCanvas()
 		this.closeModal()
 	}
 

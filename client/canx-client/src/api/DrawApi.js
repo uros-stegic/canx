@@ -4,12 +4,12 @@ import utils from '../utils/utils'
 class DrawApi {
 
   // TODO: implement draw process logic
-  static postDraw(draw) {
+  static postDraw(data) {
     const headers = Object.assign(utils.getTypeHeaders(), auth.authHeaders());
-    const request = new Request(`http://localhost:3000/api/user/draw`, {
+    const request = new Request(`http://localhost:3000/api/users/${data.uid}/drawing`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({draw: draw})
+      body: JSON.stringify(data)
     })
 
     return fetch(request).then(response => {
