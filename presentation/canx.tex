@@ -162,27 +162,13 @@
         		\item Arhitektura zasnovana na komponentama
         		\item Jednosmeran tok podataka
         	\end{itemize}
-        \item JSX - sintaksna ekstenzija Javascript-a
-        	
+        \item Dodatni moduli
+        \begin{itemize}
+        	\item JSX - sintaksna ekstenzija Javascript-a
+	        \item Redux - skladište podataka 
+        \end{itemize}
     \end{itemize}
 \end{frame}
-% -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}[fragile]{JSX}
-    \begin{itemize}
-    	\item Strogo tipiziran jezik, sličan HTML sintaksi
-    	\item Kompajlira se u Javascript i može se koristiti za kreiranje React elemenata
-		\item Lakše i brže pisanje HTML šablona
-		\begin{verbatim}
-var msg = 'Hello world!';
-return (
-   <div>
-     <h1>{msg.length > 0 ? msg : 'Goodbye world!'}</h1>
-   </div>
-);
-		\end{verbatim}		     	
-    \end{itemize}
-\end{frame}
-
 % -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Arhitektura zasnovana na komponentama}
         \begin{itemize}
@@ -219,22 +205,62 @@ return (
     	\item Stanje interfejsa je predvidivo i lako ponovljivo
     \end{itemize}
 \end{frame}
+% -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{JSX}
+    \begin{itemize}
+    	\item Strogo tipiziran jezik, sličan HTML sintaksi
+    	\item Kompajlira se u Javascript i može se koristiti za kreiranje React elemenata
+		\item Lakše i brže pisanje HTML šablona
+		\begin{verbatim}
+var msg = 'Hello world!';
+return (
+   <div>
+     <h1>{msg.length > 0 ? msg : 'Goodbye world!'}</h1>
+   </div>
+);
+		\end{verbatim}		     	
+    \end{itemize}
+\end{frame}
 
 % -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]{Redux}
     \begin{itemize}
-    	\item Kontejner koji čuva stanje aplikacije
-    	\item Osnovni princip
-    	\begin{verbatim}
+    	\item Čuva stanje aplikacije
+    	\item Osnovni principi
+    \begin{verbatim}
+    	
 (prevState, action) => newState
     	\end{verbatim}
+    	\begin{itemize}
+    		\item Data store
+    		\item Actions
+    		\item Reducers    	
+    	\end{itemize} 
     \end{itemize}
+\end{frame}
+% -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Skladište}
+    \begin{itemize}
+    	\item Jedinstveno - jedan izvor istine
+    	\item Nepromenljivo 
+    	\item Novo skladište nastaje kao rezultat čistih funkcija
+    \end{itemize}
+
 \end{frame}
 
 % -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Tok upravljanja}
       \includegraphics[scale=0.5]{./resources/redux.jpg}
 \end{frame}
+
+	
+% -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Kraj}
+     \begin{center}
+           \textbf{PITANJA}
+	 \end{center} 
+\end{frame}
+
 
 % -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
