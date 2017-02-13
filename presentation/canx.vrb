@@ -1,0 +1,8 @@
+\frametitle{Redux}
+\begin{itemize}
+     \item Kontejner koji čuva stanje aplikacije
+     \item Osnovni princip
+     \begin{verbatim}
+(prevState, action) => newState
+     \end{verbatim}
+    \end{itemize}

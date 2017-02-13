@@ -222,6 +222,7 @@ class Letter extends React.Component {
 		return minYStroke.points[0].y
 	}
 
+// TODO: refactor and sub first stroke start time from times in each points 
 	transformStrokes() {
 		const maxY = this.canvas.width
 

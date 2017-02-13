@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {serbian}
+\beamer@sectionintoc {1}{Opis projekta}{4}{0}{1}
+\beamer@sectionintoc {2}{Tehni\IeC {\v c}ka specifikacija}{5}{0}{2}
+\beamer@sectionintoc {3}{Serverska strana}{6}{0}{3}
+\beamer@sectionintoc {4}{Klijentska strana}{7}{0}{4}
